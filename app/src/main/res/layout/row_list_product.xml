@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants"
+    android:id="@+id/rowLinearLayout"
+    android:orientation="horizontal">
+    <TextView
+        android:id="@+id/nameProduct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:autoText="false"
+        android:textStyle="bold"
+        android:layout_gravity="bottom"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="produit D110"
+        android:layout_alignTop="@+id/editProd"
+        android:layout_alignRight="@+id/priceValue"
+        android:layout_alignEnd="@+id/priceValue"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="5dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/priceValue"
+        android:textStyle="bold"
+        android:text="1000"
+        android:gravity="end"
+        android:layout_toStartOf="@+id/editProd"
+        android:layout_below="@+id/editProd"
+        android:layout_toLeftOf="@+id/editProd" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="12/11/2014"
+        android:id="@+id/dateP"
+        android:gravity="center_horizontal|end"
+        android:layout_below="@+id/editProd"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="5dp" />
+
+    <ImageView
+        android:id="@+id/editProd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@android:drawable/ic_menu_edit"
+        android:focusable="false"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+</RelativeLayout>
+

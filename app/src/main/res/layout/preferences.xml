@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <PreferenceCategory android:title="@string/app_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <EditTextPreference
+            android:title="Identifiant"
+            android:summary=""
+            android:singleLine="true"
+            android:key="username"/>
+        <EditTextPreference
+            android:title="Mot de passe"
+            android:summary="Mot de passe"
+            android:singleLine="true"
+            android:key="password"
+            android:inputType="textPassword" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

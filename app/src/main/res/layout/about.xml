@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bootstrapbutton="http://schemas.android.com/apk/res-auto"
+    xmlns:bootstrap="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/abc_menu_dropdown_panel_holo_light"
+    android:clickable="false">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/scrollView"
+        style="@android:style/Animation.Translucent"
+        android:layout_above="@+id/versionButton">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:paddingBottom="10dp">
+        <TextView
+            android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:id="@+id/appLongDescriptionLabel"
+             android:linksClickable="true"
+            android:textIsSelectable="true"
+            android:textSize="17sp"
+            android:gravity="center_horizontal|left"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"/>
+
+        <TextView
+            android:text=""
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/autor"
+             android:linksClickable="true"
+            android:textIsSelectable="true"
+            android:textSize="15dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+    </LinearLayout>
+    </ScrollView>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="Success"
+        android:id="@+id/versionButton"
+        android:imeOptions="actionGo"
+        android:gravity="center|center_vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
+</RelativeLayout>
