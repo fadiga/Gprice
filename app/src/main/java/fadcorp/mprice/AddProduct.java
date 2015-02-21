@@ -1,11 +1,13 @@
 package fadcorp.mprice;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 
 
 import java.util.Calendar;
@@ -19,9 +21,9 @@ public class AddProduct extends Activity{
     private EditText nameField;
     private EditText priceField;
     private Button saveButton;
-    private DatePicker datePicker;
     private Date date;
     private Integer sId = -1;
+    private TextView dateField;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,17 +37,27 @@ public class AddProduct extends Activity{
 
         nameField = (EditText) findViewById(R.id.nameField);
         priceField = (EditText) findViewById(R.id.priceField);
-        datePicker = (DatePicker) findViewById(R.id.datePicker3);
+        dateField = (TextView) findViewById(R.id.editDate);
         nameField.requestFocus();
-
         saveButton = (Button) findViewById(R.id.saveButton);
+
+        final Calendar c = Calendar.getInstance();
+        int mYear = c.get(Calendar.YEAR);
+        int mMonth = c.get(Calendar.MONTH);
+        int mDay = c.get(Calendar.DAY_OF_MONTH);
+
+        dateField.setText(mDay + "-"
+                + (mMonth + 1) + "-" + mYear);
+
         try {
             Bundle extras = getIntent().getExtras();
             sId = Integer.valueOf(extras.getString("id"));
 
             ReportData x = ReportData.findById(ReportData.class, sId);
+
             nameField.setText(x.getName());
             priceField.setText(String.valueOf(x.getPrice()));
+            dateField.setText(Utils.dateTostrDate(x.getModifiedOn()));
         } catch (Exception a){
         }
         saveButton.setOnClickListener(new View.OnClickListener() {
@@ -55,16 +67,42 @@ public class AddProduct extends Activity{
                 // ensure data is OK
                 // save data to DB
 
-                if(!validInputChecks()){return;};
+                if (!validInputChecks()) {
+                    return;
+                }
+                ;
 
-                date = getDateFromDatePicket(datePicker);
-                if(sId == -1){
-                    if(!validChecks()){return;};
+                date = Utils.strDateToDate(dateField.getText().toString());
+                if (sId == -1) {
+                    if (!validChecks()) {
+                        return;
+                    }
+                    ;
                     storeReportData();
                 } else {
                     updateReport(sId);
                 }
                 finish();
+            }
+        });
+
+        final DatePickerDialog dpd = new DatePickerDialog(this,
+                new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int monthOfYear, int dayOfMonth) {
+                        dateField.setText(dayOfMonth + "-"
+                                + (monthOfYear + 1) + "-" + year);
+                    }
+                }, mYear, mMonth, mDay);
+        dateField.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // ensure data is OK
+                // save data to DB
+                dpd.show();
             }
         });
     }
@@ -97,16 +135,6 @@ public class AddProduct extends Activity{
     }
     protected String stringFromField(EditText editText) {
         return editText.getText().toString().trim();
-    }
-    public static java.util.Date getDateFromDatePicket(DatePicker datePicker){
-        int day = datePicker.getDayOfMonth();
-        int month = datePicker.getMonth();
-        int year =  datePicker.getYear();
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(year, month, day);
-
-        return calendar.getTime();
     }
     protected void addErrorToField(EditText editText, String message) {
         editText.setError(message);

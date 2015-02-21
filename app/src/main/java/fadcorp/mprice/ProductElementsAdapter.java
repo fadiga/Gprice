@@ -2,8 +2,12 @@ package fadcorp.mprice;
 
 import java.util.ArrayList;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,11 +53,11 @@ public class ProductElementsAdapter extends BaseAdapter {
             convertView = (View) inflater.inflate(
                     R.layout.row_list_product, null);
         }
-
+        final String priceValue = productElements.get(position).getPrice();
         TextView nameProduct = (TextView)convertView.findViewById(R.id.nameProduct);
         nameProduct.setText(productElements.get(position).getName());
-        TextView price = (TextView)convertView.findViewById(R.id.priceValue);
-        price.setText(productElements.get(position).getPrice());
+        final TextView price = (TextView)convertView.findViewById(R.id.priceValue);
+        price.setText(priceValue);
         TextView date = (TextView)convertView.findViewById(R.id.dateP);
         date.setText(productElements.get(position).getModifiedOn());
         ImageView image = (ImageView) convertView.findViewById(R.id.editProd);
@@ -64,6 +68,15 @@ public class ProductElementsAdapter extends BaseAdapter {
                 Intent a = new Intent(context, AddProduct.class);
                 a.putExtra("id", String.valueOf(prodId));
                 context.startActivity(a);
+            }
+        });
+        price.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+                String moneyType = sharedPrefs.getString("moneyType", null);
+                new GetJsonDevises((android.app.Activity) context).execute(priceValue.split(" ")[0], moneyType);
             }
         });
         /*ImageView image = (ImageView) convertView.findViewById(R.id.tagImage);

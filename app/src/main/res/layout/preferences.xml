@@ -17,6 +17,12 @@
             android:key="password"
             android:inputType="textPassword" />
 
+        <ListPreference android:key="moneyType"
+            android:title="@string/device_prompt"
+            android:entries="@array/settings_money_type_value"
+            android:entryValues="@array/settings_money_type_value"
+            android:defaultValue="Franc CFA">
+        </ListPreference>
     </PreferenceCategory>
 
 </PreferenceScreen>

@@ -5,10 +5,12 @@ import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -81,24 +83,27 @@ public class Home extends Utils {
         });
 
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME);
-        setupUIr();
+        setupUI();
         //TelephonyManager tMgr = (TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
         //String mPhoneNumber = tMgr.getLine1Number();
         //Toast.makeText(this, mPhoneNumber, Toast.LENGTH_SHORT).show();
     }
 
-    public void setupUIr() {
+    public void setupUI() {
 
         mListView = (ListView)findViewById(R.id.listProd);
         ProductElement productElement;
         ArrayList<ProductElement> productElements = new ArrayList<ProductElement>();
         List<ReportData> productDataList;
         productDataList = Select.from(ReportData.class).orderBy("name").list();
+
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String moneyType = sharedPrefs.getString("moneyType", null);
         try {
             for (ReportData prod : productDataList) {
                 productElement = new ProductElement();
                 productElement.setProdId(prod.getId());
-                productElement.setPrice(Constants.getDefaultCurrencyFormat(prod.getPrice()));
+                productElement.setPrice(Constants.getDefaultCurrencyFormat(prod.getPrice()) + " " + moneyType );
                 productElement.setName(prod.getName());
                 productElement.setModifiedOn(Constants.formatDate(prod.getModifiedOn(), this));
                 productElements.add(productElement);
@@ -115,7 +120,7 @@ public class Home extends Utils {
     @Override
     protected void onResume() {
         super.onResume();
-        setupUIr();
+        setupUI();
     }
 
     @Override

@@ -5,4 +5,34 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="textViewLabel">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:linksClickable">false</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:layout_margin">5dp</item>
+        <!-- <item name="android:background">@color/abc_search_url_text_normal</item> -->
+    </style>
+    <style name="editNumberText" parent="editText">
+        <item name="android:inputType">number</item>
+    </style>
+    <style name="editDecimalText" parent="editText">
+        <item name="android:inputType">numberDecimal</item>
+    </style>
+    <style name="editText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:ems">10</item>
+        <item name="android:layout_margin">5dp</item>
+        <item name="android:singleLine">false</item>
+        <item name="android:editable">true</item>
+        <!-- <item name="android:background">@color/abc_search_url_text_pressed</item> -->
+    </style>
+    <style name="button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">#7BA181</item>
+        <item name="android:layout_margin">5dp</item>
+    </style>
 </resources>

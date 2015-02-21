@@ -11,33 +11,26 @@
         android:orientation="vertical"
         android:weightSum="1">
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/editNumberText"
             android:id="@+id/nameField"
             android:hint="Désignation"
-            android:imeOptions="actionNext"
-            android:layout_margin="10dp" />
+            android:imeOptions="actionNext"/>
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/editDecimalText"
             android:id="@+id/priceField"
             android:hint="Prix U."
-            android:imeOptions="actionDone"
-            android:layout_margin="10dp"
-            android:numeric="decimal" />
+            android:imeOptions="actionDone" />
 
-        <DatePicker
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/datePicker3"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_weight="0.42" />
-        <Button
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Enregistrer"
-            android:id="@+id/saveButton"
+            style="@android:style/Widget.Holo.Spinner"
+            android:id="@+id/editDate"
             android:layout_margin="10dp" />
+
+        <Button
+            style="@style/button"
+            android:text="Enregistrer"
+            android:id="@+id/saveButton" />
     </LinearLayout>
 </ScrollView>

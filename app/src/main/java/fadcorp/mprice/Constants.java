@@ -4,14 +4,20 @@ import android.content.Context;
 
 import java.text.NumberFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 public class Constants {
 
     private final static String TAG = Constants.getLogTag("Constants");
+    public static final String TO = "to";
+    public static final String FROM = "from";
+    public static final String RATE = "rate";
+    public static final String VALUE = "v";
 
     public static final String getLogTag(String activity) {
-        return String.format("MPriceLog-%s", activity);
+        return String.format("MPLog-%s", activity);
     }
 
 
@@ -48,6 +54,7 @@ public class Constants {
     {
         NumberFormat nf = NumberFormat.getNumberInstance(Locale.getDefault());
         nf.setGroupingUsed(true);
-        return nf.format(value) + " Fcfa";
+        return nf.format(value);
     }
+    
 }

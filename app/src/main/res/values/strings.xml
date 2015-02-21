@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <string name="about">À propos</string>
+    <string name="required_connexion_title">Connexion requise</string>
+    <string name="required_connexion_body">Vous êtes en mode hors connexion.</string>
+    <string name="required_connexion_cancel">Annuler</string>
+    <string name="required_connexion_retry">Réessayer</string>
     <string name="app_name">MPrice</string>
-    <string name="prod" formatted="false"><![CDATA[
-            <b>%s </b><br/>
-            Prix: <strong>%.2f</strong> FCFa<br/>
-            <b>Le %s</b>]]></string>
-    <string name="action_settings">Settings</string>
+
+    <string name="loading">Chargement en cours ...</string>
     <string name="action_search">recherche</string>
-    <string name="app_market_url">market://details?id=fadcorp.com.mprice</string>
+    <string name="app_market_url">market://details?id=fadcorp.mprice</string>
     <string name="version_button_label">Version %1$s (vérifier mises à jour)</string>
     <string name="error_field_empty">Champs requis</string>
-    <string name="about">Àpropos</string>
     <string name="about_long_description">
         <![CDATA[
             <h4>M price</h4>
@@ -29,11 +31,13 @@
          ]]>
     </string>
     <string name="menu_settings">Configuration</string>
-    <string-array name = "spinner_item">
-        <item>Item 1</item>
-        <item>Item 2</item>
-        <item>Item 3</item>
-        <item>Item 4</item>
-        <item>Item 5</item>
+
+    <string name="device_prompt">Devises</string>
+    <string-array name = "settings_money_type_value">
+        <item>Franc CFA</item>
+        <item>Euro</item>
+        <item>Dollar</item>
+        <item></item>
     </string-array>
+    <string name="action_settings">Configuration</string>
 </resources>
