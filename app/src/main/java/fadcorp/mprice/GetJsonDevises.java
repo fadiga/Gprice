@@ -28,7 +28,6 @@ public class GetJsonDevises extends AsyncTask<String, Void, Void> {
     boolean isOnline;
 
     JSONObject jObject;
-    JSONParser jParser = new JSONParser();
     String data = null;
     String data1 = null;
     private String to;
@@ -88,7 +87,6 @@ public class GetJsonDevises extends AsyncTask<String, Void, Void> {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
         return null;
     }
 
@@ -105,8 +103,7 @@ public class GetJsonDevises extends AsyncTask<String, Void, Void> {
                 progressDialog = null;
             }
 
-            AlertDialog alertDialog = new AlertDialog.Builder(
-                    context).create();
+            AlertDialog alertDialog = new AlertDialog.Builder( context).create();
             alertDialog.setTitle("Convertion de " + "");
             alertDialog.setMessage(from + " --> " + to + "=" + v);
             alertDialog.setIcon(R.drawable.ic_launcher);

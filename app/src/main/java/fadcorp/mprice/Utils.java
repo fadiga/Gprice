@@ -18,9 +18,11 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by fad on 14/12/14.
@@ -173,5 +175,13 @@ public class Utils extends Activity{
         String finalDate = timeFormat.format(date);
 
         return finalDate;
+    }
+
+    public static String getDefaultCurrencyFormat(float value)
+    {
+        NumberFormat nf = NumberFormat.getNumberInstance(Locale.getDefault());
+        nf.setGroupingUsed(true);
+        nf.setMaximumFractionDigits(3);
+        return nf.format(value);
     }
 }

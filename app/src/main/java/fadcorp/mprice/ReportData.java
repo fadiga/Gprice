@@ -31,7 +31,7 @@ public class ReportData extends SugarRecord {
         this.name = name;
     }
 
-    public void setPrice(Float price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 
@@ -39,7 +39,7 @@ public class ReportData extends SugarRecord {
         return this.name;
     }
 
-    public Float getPrice() {
+    public float getPrice() {
         return this.price;
     }
 

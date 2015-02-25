@@ -29,7 +29,6 @@ public class AddProduct extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_product);
-
         setupUI();
     }
 
@@ -45,10 +44,9 @@ public class AddProduct extends Activity{
         int mYear = c.get(Calendar.YEAR);
         int mMonth = c.get(Calendar.MONTH);
         int mDay = c.get(Calendar.DAY_OF_MONTH);
-
-        dateField.setText(mDay + "-"
-                + (mMonth + 1) + "-" + mYear);
-
+        date = c.getTime();
+        //dateField.setText(mDay + "-" + (mMonth + 1) + "-" + mYear);
+        dateField.setText(Constants.formatDate(date, this));
         try {
             Bundle extras = getIntent().getExtras();
             sId = Integer.valueOf(extras.getString("id"));
@@ -57,27 +55,20 @@ public class AddProduct extends Activity{
 
             nameField.setText(x.getName());
             priceField.setText(String.valueOf(x.getPrice()));
-            dateField.setText(Utils.dateTostrDate(x.getModifiedOn()));
+            dateField.setText(Constants.formatDate(x.getModifiedOn(), this));
         } catch (Exception a){
         }
         saveButton.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
-                // ensure data is OK
-                // save data to DB
-
                 if (!validInputChecks()) {
                     return;
-                }
-                ;
-
-                date = Utils.strDateToDate(dateField.getText().toString());
+                };
+                //date = Utils.strDateToDate(dateField.getText().toString());
                 if (sId == -1) {
                     if (!validChecks()) {
                         return;
-                    }
-                    ;
+                    };
                     storeReportData();
                 } else {
                     updateReport(sId);
@@ -88,12 +79,12 @@ public class AddProduct extends Activity{
 
         final DatePickerDialog dpd = new DatePickerDialog(this,
                 new DatePickerDialog.OnDateSetListener() {
-
                     @Override
                     public void onDateSet(DatePicker view, int year,
                                           int monthOfYear, int dayOfMonth) {
-                        dateField.setText(dayOfMonth + "-"
-                                + (monthOfYear + 1) + "-" + year);
+                        //dateField.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                        date = Utils.strDateToDate(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                        dateField.setText(Constants.formatDate(date, AddProduct.this));
                     }
                 }, mYear, mMonth, mDay);
         dateField.setOnClickListener(new View.OnClickListener() {

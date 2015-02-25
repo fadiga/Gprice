@@ -21,7 +21,7 @@
             android:title="@string/device_prompt"
             android:entries="@array/settings_money_type_value"
             android:entryValues="@array/settings_money_type_value"
-            android:defaultValue="Franc CFA">
+            android:defaultValue="">
         </ListPreference>
     </PreferenceCategory>
 

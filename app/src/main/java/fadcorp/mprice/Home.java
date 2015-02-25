@@ -69,7 +69,6 @@ public class Home extends Utils {
             public void afterTextChanged(Editable s) {}
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                //adapter.getFilter().filter(s);
                 mAdapter.getFilter().filter(s);
             }
         });
@@ -103,7 +102,7 @@ public class Home extends Utils {
             for (ReportData prod : productDataList) {
                 productElement = new ProductElement();
                 productElement.setProdId(prod.getId());
-                productElement.setPrice(Constants.getDefaultCurrencyFormat(prod.getPrice()) + " " + moneyType );
+                productElement.setPrice(Utils.getDefaultCurrencyFormat(prod.getPrice()) + " " + moneyType );
                 productElement.setName(prod.getName());
                 productElement.setModifiedOn(Constants.formatDate(prod.getModifiedOn(), this));
                 productElements.add(productElement);
