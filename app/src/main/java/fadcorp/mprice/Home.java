@@ -54,13 +54,6 @@ public class Home extends Utils {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        String fromAssetPath = "/data/data/" +
-                               getPackageName();
-        String toPath = "/sdcart/FAD";
-        Log.d("DDDD", fromAssetPath);
-        copyAssetFolder(getAssets(), toPath, fromAssetPath);
-        //copyAssetFolder(getAssets(), fromAssetPath, toPath);
-
         ActionBar actionBar = getActionBar();
         // add the custom view to the action bar
         actionBar.setCustomView(R.layout.finder);
@@ -97,7 +90,8 @@ public class Home extends Utils {
         productDataList = Select.from(ReportData.class).orderBy("name").list();
 
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        String moneyType = sharedPrefs.getString("moneyType", null);
+        String moneyType = sharedPrefs.getString("moneyType", "");
+
         try {
             for (ReportData prod : productDataList) {
                 productElement = new ProductElement();
@@ -137,6 +131,10 @@ public class Home extends Utils {
             startActivity(a);
         }
         if (id == R.id.about) {
+            Intent a = new Intent(Home.this, About.class);
+            startActivity(a);
+        }
+        if (id == R.id.manage_db) {
             Intent a = new Intent(Home.this, About.class);
             startActivity(a);
         }

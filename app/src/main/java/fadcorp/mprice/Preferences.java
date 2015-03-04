@@ -18,7 +18,8 @@ public class Preferences extends PreferenceActivity {
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         String username = sharedPrefs.getString("username", "");
         String passwork = sharedPrefs.getString("passwork", "");
-        String moneyType = sharedPrefs.getString("moneyType", "");
+        String moneyType = sharedPrefs.getString("moneyType", "Fcfa");
+
         SharedPreferences.Editor editor = sharedPrefs.edit();
         editor.putString("username", "");
         editor.putString("passwork", "");

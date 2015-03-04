@@ -19,9 +19,9 @@
 
         <ListPreference android:key="moneyType"
             android:title="@string/device_prompt"
-            android:entries="@array/settings_money_type_value"
+            android:entries="@array/settings_money_type"
             android:entryValues="@array/settings_money_type_value"
-            android:defaultValue="">
+            android:defaultValue="Fcfa">
         </ListPreference>
     </PreferenceCategory>
 

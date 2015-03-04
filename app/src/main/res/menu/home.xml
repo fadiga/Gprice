@@ -10,4 +10,8 @@
         android:title="@string/action_settings"
         android:orderInCategory="100"
         app:showAsAction="never" />
+    <item android:id="@+id/manage_db"
+        android:title="@string/manage_db"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
 </menu>

@@ -33,11 +33,18 @@
     <string name="menu_settings">Configuration</string>
 
     <string name="device_prompt">Devises</string>
+    <string-array name = "settings_money_type">
+        <item>Fcfa</item>
+        <item>Euro</item>
+        <item>Dollar</item>
+        <item></item>
+    </string-array>
     <string-array name = "settings_money_type_value">
-        <item>Franc CFA</item>
+        <item>Fcfa</item>
         <item>Euro</item>
         <item>Dollar</item>
         <item></item>
     </string-array>
     <string name="action_settings">Configuration</string>
+    <string name="manage_db">Gestion base de données</string>
 </resources>
