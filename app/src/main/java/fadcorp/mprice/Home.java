@@ -6,12 +6,9 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -19,25 +16,15 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.Toast;
 
 import com.orm.query.Select;
 
-import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-
 
 public class Home extends Utils {
 
@@ -134,8 +121,8 @@ public class Home extends Utils {
             Intent a = new Intent(Home.this, About.class);
             startActivity(a);
         }
-        if (id == R.id.manage_db) {
-            Intent a = new Intent(Home.this, About.class);
+        if (id == R.id.action_db_manage) {
+            Intent a = new Intent(Home.this, ExportImportDB  .class);
             startActivity(a);
         }
         return super.onOptionsItemSelected(item);

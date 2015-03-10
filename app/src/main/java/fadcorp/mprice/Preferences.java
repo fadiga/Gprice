@@ -25,7 +25,7 @@ public class Preferences extends PreferenceActivity {
         editor.putString("passwork", "");
         //editor.putString("moneyType", "");
         editor.apply();
-        addPreferencesFromResource(R.layout.preferences);
+        addPreferencesFromResource(R.xml.preferences);
     }
 
 }

@@ -3,14 +3,13 @@ package fadcorp.mprice;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.res.AssetManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
-import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,6 +17,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.channels.FileChannel;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -31,50 +31,23 @@ public class Utils extends Activity{
 
     private static final String TAG = Constants.getLogTag("Utils");
 
-    protected static boolean copyAssetFolder(AssetManager assetManager,
-                                             String fromAssetPath, String toPath) {
-        Log.d("DDDD", fromAssetPath + "|" + toPath);
+    public static void copyFile(FileInputStream fromFile, FileOutputStream toFile) throws IOException {
+        FileChannel fromChannel = null;
+        FileChannel toChannel = null;
         try {
-            String[] files = assetManager.list(fromAssetPath);
-            new File(toPath).mkdirs();
-            boolean res = true;
-            for (String file : files)
-                if (file.contains("."))
-                    res &= copyAsset(assetManager,
-                            fromAssetPath + "/" + file,
-                            toPath + "/" + file);
-                else
-                    res &= copyAssetFolder(assetManager,
-                            fromAssetPath + "/" + file,
-                            toPath + "/" + file);
-            return res;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    protected static boolean copyAsset(AssetManager assetManager,
-                                       String fromAssetPath, String toPath) {
-        InputStream in = null;
-        OutputStream out = null;
-        try {
-            in = assetManager.open(fromAssetPath);
-            Log.d("DDDD", String.valueOf(in)+ " 2222222222222");
-            new File(toPath).createNewFile();
-            out = new FileOutputStream(toPath);
-
-            copyFile(in, out);
-            in.close();
-            in = null;
-            out.flush();
-            out.close();
-            out = null;
-            return true;
-        } catch(Exception e) {
-            Log.d("DDDD", String.valueOf(e));
-            //e.printStackTrace();
-            return false;
+            fromChannel = fromFile.getChannel();
+            toChannel = toFile.getChannel();
+            fromChannel.transferTo(0, fromChannel.size(), toChannel);
+        } finally {
+            try {
+                if (fromChannel != null) {
+                    fromChannel.close();
+                }
+            } finally {
+                if (toChannel != null) {
+                    toChannel.close();
+                }
+            }
         }
     }
 
