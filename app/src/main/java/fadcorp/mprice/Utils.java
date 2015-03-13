@@ -9,6 +9,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -142,6 +143,7 @@ public class Utils extends Activity{
         }
         return date;
     }
+
     public static String dateTostrDate(Date date) {
 
         SimpleDateFormat timeFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -156,5 +158,18 @@ public class Utils extends Activity{
         nf.setGroupingUsed(true);
         nf.setMaximumFractionDigits(3);
         return nf.format(value);
+    }
+
+    public static void copyFile(Activity context, File from, File to) {
+        try {
+
+            FileChannel src = new FileInputStream(from).getChannel();
+            FileChannel dst = new FileOutputStream(to).getChannel();
+            dst.transferFrom(src, 0, src.size());
+            src.close();
+            dst.close();
+        } catch (Exception e){
+            Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show();
+        }
     }
 }

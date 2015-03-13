@@ -2,15 +2,14 @@ package fadcorp.mprice;
 
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.format.Time;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.nio.channels.FileChannel;
+import java.util.Date;
 
 /**
  * Created by fad on 23/02/15.
@@ -24,20 +23,20 @@ public class ExportImportDB extends Utils {
     private File backupDir;
     private Button importDbBtt;
     private FileDialog fileDialog;
+    private Date date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.db_manager);
-        
+
         File sd = Environment.getExternalStorageDirectory();
 
         if (!sd.canWrite()) {
             return;
         }
-        File data = Environment.getDataDirectory();
-        String currentDBPath = "data//"+ getPackageName()+"//databases//"+databaseName+"";
-        currentDB = new File(data, currentDBPath);
+
+        currentDB = getApplicationContext().getDatabasePath(databaseName);
         packageName = getPackageName();
 
         backupDir = new File(sd.getAbsolutePath()+ "/" + packageName);
@@ -61,43 +60,33 @@ public class ExportImportDB extends Utils {
             }
         });
     }
-    
+
     //importing database
     private void importDB() {
+        exportDatabse(databaseName);
         File mPath = new File(Environment.getExternalStorageDirectory() + "//DIR//");
         fileDialog = new FileDialog(this, mPath);
         fileDialog.setFileEndsWith(".db");
         fileDialog.addFileListener(new FileDialog.FileSelectedListener() {
             public void fileSelected(File file) {
-                Log.d(TAG, "" + getClass().getName());
                 Log.d(TAG, "selected file " + file.toString());
+                Utils.copyFile(ExportImportDB.this, file, currentDB);
+                Toast.makeText(getBaseContext(), databaseName + " a été importée avec succès depuis \n" + file.getAbsolutePath(), Toast.LENGTH_LONG).show();
             }
         });
-        //fileDialog.addDirectoryListener(new FileDialog.DirectorySelectedListener() {
-        //  public void directorySelected(File directory) {
-        //      Log.d(getClass().getName(), "selected dir " + directory.toString());
-        //  }
-        //});
-        //fileDialog.setSelectDirectoryOption(false);
         fileDialog.showDialog();
     }
     //exporting database
     public void exportDatabse(String databaseName) {
-        try {
-            String backupDBName = String.format("backup_%s", databaseName);
-            File backupDB = new File(backupDir, backupDBName);
+        Time t = new Time(Time.getCurrentTimezone());
+        t.setToNow();
+        String dateNow = t.format("%Y-%m-%d-%Hh-%Mm");
+        String backupDBName = String.format("backup-%s.db", dateNow);
+        File backupDB = new File(backupDir, backupDBName);
 
-            Log.d(TAG, backupDir.toString() + " " + currentDB + " " + currentDB.exists());
-            if (currentDB.exists()) {
-                FileChannel src = new FileInputStream(currentDB).getChannel();
-                FileChannel dst = new FileOutputStream(backupDB).getChannel();
-                dst.transferFrom(src, 0, src.size());
-                src.close();
-                dst.close();
-                Toast.makeText(getBaseContext(), databaseName + " a été exportée avec succès dans \n" + backupDB.getAbsolutePath(), Toast.LENGTH_LONG).show();
-            }
-        } catch (Exception e) {
-            Toast.makeText(getBaseContext(), e.toString(), Toast.LENGTH_LONG).show();
-        }
+        Log.d(TAG,  currentDB + " " + currentDB.exists());
+        Utils.copyFile(this, currentDB, backupDB);
+        Toast.makeText(getBaseContext(), databaseName + " a été exportée avec succès dans \n" + backupDB.getAbsolutePath(), Toast.LENGTH_LONG).show();
+
     }
 }
