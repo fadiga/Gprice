@@ -4,7 +4,7 @@ public class ProductElement {
     Long prodId;
     String name;
     String modifiedOn;
-    String price;
+    float price;
 
     public String getModifiedOn() {
         return modifiedOn;
@@ -22,11 +22,11 @@ public class ProductElement {
         this.name = name;
     }
 
-    public String getPrice() {
+    public float getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 

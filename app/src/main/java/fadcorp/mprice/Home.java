@@ -5,10 +5,8 @@ import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -34,6 +32,10 @@ public class Home extends Utils {
     private SimpleAdapter adapter;
 
     private ProductElementsAdapter mAdapter;
+
+    // TODO add page of the actuality https://fr.finance.yahoo.com/actualites/categorie-devises/?format=rss
+    // TODO automatical backup online
+    // TODO correction selected devise in preference
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
@@ -76,14 +78,11 @@ public class Home extends Utils {
         List<ReportData> productDataList;
         productDataList = Select.from(ReportData.class).orderBy("name").list();
 
-        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        String moneyType = sharedPrefs.getString("moneyType", "");
-
         try {
             for (ReportData prod : productDataList) {
                 productElement = new ProductElement();
                 productElement.setProdId(prod.getId());
-                productElement.setPrice(Utils.getDefaultCurrencyFormat(prod.getPrice()) + " " + moneyType );
+                productElement.setPrice(prod.getPrice());
                 productElement.setName(prod.getName());
                 productElement.setModifiedOn(Constants.formatDate(prod.getModifiedOn(), this));
                 productElements.add(productElement);
@@ -119,10 +118,6 @@ public class Home extends Utils {
         }
         if (id == R.id.about) {
             Intent a = new Intent(Home.this, About.class);
-            startActivity(a);
-        }
-        if (id == R.id.action_db_manage) {
-            Intent a = new Intent(Home.this, ExportImportDB  .class);
             startActivity(a);
         }
         return super.onOptionsItemSelected(item);

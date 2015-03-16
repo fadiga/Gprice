@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="app_name">Guide du vendeur</string>
     <string name="about">À propos</string>
     <string name="required_connexion_title">Connexion requise</string>
     <string name="required_connexion_body">Vous êtes en mode hors connexion.</string>
     <string name="required_connexion_cancel">Annuler</string>
     <string name="required_connexion_retry">Réessayer</string>
-    <string name="app_name">MPrice</string>
 
     <string name="loading">Chargement en cours ...</string>
     <string name="action_search">recherche</string>
@@ -15,7 +15,7 @@
     <string name="error_field_empty">Champs requis</string>
     <string name="about_long_description">
         <![CDATA[
-            <h4>M price</h4>
+            <h4>Guide du vendeur</h4>
              Cette application est une aide mémoire. pour les commerçants.<br/>
               \t* Ajout d\'article.<br/>
               \t* Mise à jour des articles.<br/>
@@ -37,14 +37,20 @@
         <item>Fcfa</item>
         <item>Euro</item>
         <item>Dollar</item>
-        <item></item>
+        <item>Yen</item>
     </string-array>
     <string-array name = "settings_money_type_value">
-        <item>Fcfa</item>
-        <item>Euro</item>
+        <item>XOF</item>
+        <item>Eur</item>
         <item>Dollar</item>
-        <item></item>
+        <item>Yen</item>
     </string-array>
     <string name="action_settings">Configuration</string>
     <string name="manage_db">Gestion base de données</string>
+    <string name="default_devise">XOF</string>
+
+    <string name="rest_database">Suppression des données.</string>
+    <string name="rest_confermed">"Êtes-vous certain?"</string>
+    <string name="advanced">Paramètres avancés</string>
+    <string name="summary_reset_db">Appui %d fois pour supprimer la base de données.</string>
 </resources>

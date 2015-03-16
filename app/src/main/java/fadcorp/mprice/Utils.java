@@ -6,6 +6,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -63,8 +64,7 @@ public class Utils extends Activity{
     http://rate-exchange.appspot.com/currency?from=EUR&to=XOF&q=12
      */
     public static String formatUrl(String from, String to, String value){
-        String url = String.format("http://rate-exchange.appspot.com/currency?from=%s&to=%s&q=%s", from, to, value);
-        return url;
+        return String.format("http://rate-exchange.appspot.com/currency?from=%s&to=%s&q=%s", from, to, value);
     }
 
 
@@ -171,5 +171,19 @@ public class Utils extends Activity{
         } catch (Exception e){
             Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show();
         }
+    }
+
+    protected static float floatFromField(EditText editText) {
+        return floatFromField(editText, -1);
+    }
+    protected static float floatFromField(EditText editText, int fallback) {
+        String text = stringFromField(editText);
+        if (text.length() > 0) {
+            return Float.parseFloat(text);
+        }
+        return fallback;
+    }
+    protected static String stringFromField(EditText editText) {
+        return editText.getText().toString().trim();
     }
 }

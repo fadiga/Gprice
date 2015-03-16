@@ -100,32 +100,19 @@ public class AddProduct extends Activity{
 
     protected void storeReportData() {
        ReportData report = new ReportData(date,
-                stringFromField(nameField).toLowerCase(),
-                floatFromField(priceField));
+                Utils.stringFromField(nameField).toLowerCase(),
+                Utils.floatFromField(priceField));
         report.save();
 
     }
 
-    protected  void updateReport(long sid) {
+    protected void updateReport(long sid) {
 
         ReportData rpt =  ReportData.findById(ReportData.class, sid);
-                rpt.setName(stringFromField(nameField).toLowerCase());
-                rpt.setPrice(floatFromField(priceField));
+                rpt.setName(Utils.stringFromField(nameField).toLowerCase());
+                rpt.setPrice(Utils.floatFromField(priceField));
                 rpt.setModifiedOn(date);
                 rpt.save();
-    }
-    protected float floatFromField(EditText editText) {
-        return floatFromField(editText, -1);
-    }
-    protected float floatFromField(EditText editText, int fallback) {
-        String text = stringFromField(editText);
-        if (text.length() > 0) {
-            return Float.parseFloat(text);
-        }
-        return fallback;
-    }
-    protected String stringFromField(EditText editText) {
-        return editText.getText().toString().trim();
     }
     protected void addErrorToField(EditText editText, String message) {
         editText.setError(message);
@@ -150,7 +137,7 @@ public class AddProduct extends Activity{
     }
     protected boolean validChecks() {
 
-        String value = stringFromField(nameField).toLowerCase();
+        String value = Utils.stringFromField(nameField).toLowerCase();
         List rpt = ReportData.find(ReportData.class, "name = ?", value);
         if (!rpt.isEmpty()) {
             nameField.setError(String.format("%s existe déjà dans la base de donnée", value));

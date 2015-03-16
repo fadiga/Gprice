@@ -7,7 +7,7 @@
         android:layout_height="wrap_content">
         <EditTextPreference
             android:title="Identifiant"
-            android:summary=""
+            android:summary="Identifiant"
             android:singleLine="true"
             android:key="username"/>
         <EditTextPreference
@@ -16,13 +16,30 @@
             android:singleLine="true"
             android:key="password"
             android:inputType="textPassword" />
-
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/device_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
         <ListPreference android:key="moneyType"
-            android:title="@string/device_prompt"
+            android:title="Choix de devise"
+            android:defaultValue="@string/default_devise"
             android:entries="@array/settings_money_type"
-            android:entryValues="@array/settings_money_type_value"
-            android:defaultValue="Fcfa">
+            android:entryValues="@array/settings_money_type_value">
         </ListPreference>
     </PreferenceCategory>
 
+    <PreferenceCategory android:title="@string/manage_db"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Preference android:title="Export"
+            android:key="exportDB"
+            android:summary="Exporter la base de données"/>
+        <Preference android:title="Import"
+            android:key="importDB"
+            android:summary="Importer la base de données"/>
+        <Preference android:title="@string/rest_database"
+            android:key="restDB"
+            android:summary="@string/summary_reset_db"/>
+    </PreferenceCategory>
 </PreferenceScreen>

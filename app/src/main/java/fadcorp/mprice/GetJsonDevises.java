@@ -1,22 +1,14 @@
 package fadcorp.mprice;
 
 import android.app.Activity;
-import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.TextView;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-
-import fadcorp.mprice.Constants;
-import fadcorp.mprice.Utils;
 
 
 public class GetJsonDevises extends AsyncTask<String, Void, Void> {
@@ -25,19 +17,20 @@ public class GetJsonDevises extends AsyncTask<String, Void, Void> {
 
     private final Activity context;
     private ProgressDialog progressDialog;
+    private Dialog dialog_;
     boolean isOnline;
 
     JSONObject jObject;
     String data = null;
-    String data1 = null;
     private String to;
     private String from;
-    private int priceV;
+    private String priceV;
     private Object rate;
     private Object v;
 
-    public GetJsonDevises(Activity applicationContext) {
+    public GetJsonDevises(Activity applicationContext, Dialog dialog) {
          context = applicationContext;
+         dialog_ = dialog;
     }
 
     @Override
@@ -50,24 +43,22 @@ public class GetJsonDevises extends AsyncTask<String, Void, Void> {
         } else {
             progressDialog = Utils.getStandardProgressDialog(context,
                     "", context.getString(R.string.loading), false);
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             progressDialog.show();
+            //dialog.;
         }
     }
 
     @Override
     protected Void doInBackground(String... params) {
-        String defaultDv = params[0];
-        String value = params[1];
+        Log.d(TAG, "doInBackground");
+        from = params[0];
+        to = params[1];
+        priceV = params[2];
         try {
-            final String devices [] = {"XOF","EUR", "Dolar"};
-            for(String devise: devices) {
-                if (devise != defaultDv) {
-                    String url = Utils.formatUrl(defaultDv, "XOF", value);
-                    String url1 = Utils.formatUrl(defaultDv, "XOF", value);
-                    data = Utils.getFromUrl(url);
-                    data1 = Utils.getFromUrl(url1);
-                }
-            }
+            String url = Utils.formatUrl(from, to, priceV);
+            Log.d(TAG, url);
+            data = Utils.getFromUrl(url);
         } catch (Exception e) {
             Log.e(TAG, "doInBackground Exception" + e + "\nLe lien (url) vers la liste des articles est mort.");
             return null;
@@ -78,14 +69,14 @@ public class GetJsonDevises extends AsyncTask<String, Void, Void> {
             Log.d(TAG, "JSONException " + e.toString());
         }
         try {
-            Log.d(TAG, (String) jObject.get(Constants.TO));
+            Log.d(TAG, jObject.names().toString());
             to = jObject.get(Constants.TO).toString();
             from = jObject.get(Constants.FROM).toString();
-            rate = jObject.get(Constants.RATE);
-            v = jObject.get(Constants.VALUE);
+            rate = jObject.getDouble(Constants.RATE);
+            v = jObject.getDouble(Constants.VALUE);
             //Log.d(TAG, (String) v);
         } catch (JSONException e) {
-            e.printStackTrace();
+            Log.d(TAG, e.toString());
         }
         return null;
     }
@@ -97,24 +88,15 @@ public class GetJsonDevises extends AsyncTask<String, Void, Void> {
         if (isOnline) {
             try {
                 if ((progressDialog != null) && progressDialog.isShowing()) {
-                    //progressDialog.dismiss();
+                    progressDialog.dismiss();
+                   // dialog.dismiss();
+                    TextView t = (TextView) dialog_.findViewById(R.id.amswer);
+                    t.setText(v.toString() + " " + from);
                 }
             } catch (final Exception e) {
                 progressDialog = null;
             }
 
-            AlertDialog alertDialog = new AlertDialog.Builder( context).create();
-            alertDialog.setTitle("Convertion de " + "");
-            alertDialog.setMessage(from + " --> " + to + "=" + v);
-            alertDialog.setIcon(R.drawable.ic_launcher);
-            alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    // Write your code here to execute after dialog closed
-                    //Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
-                }
-            });
-            // Showing Alert Message
-            alertDialog.show();
         }
     }
 }
