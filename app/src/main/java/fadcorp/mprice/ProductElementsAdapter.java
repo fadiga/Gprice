@@ -2,7 +2,6 @@ package fadcorp.mprice;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
@@ -70,9 +69,12 @@ public class ProductElementsAdapter extends BaseAdapter {
         image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent a = new Intent(context, AddProduct.class);
+                /*Intent a = new Intent(context, AddProduct.class);
                 a.putExtra("id", String.valueOf(prodId));
-                context.startActivity(a);
+                context.startActivity(a);*/
+
+                EditAndAddDialog editAndAddDialog = new EditAndAddDialog(context, prodId);
+                editAndAddDialog.show();
             }
         });
         priceField.setOnClickListener(new View.OnClickListener(){

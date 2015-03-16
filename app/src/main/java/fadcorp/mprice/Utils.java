@@ -162,7 +162,6 @@ public class Utils extends Activity{
 
     public static void copyFile(Activity context, File from, File to) {
         try {
-
             FileChannel src = new FileInputStream(from).getChannel();
             FileChannel dst = new FileOutputStream(to).getChannel();
             dst.transferFrom(src, 0, src.size());
