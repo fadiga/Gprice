@@ -21,6 +21,7 @@ public class AddProduct extends Activity{
     private EditText nameField;
     private EditText priceField;
     private Button saveButton;
+    private Button saveContinuousButton;
     private Date date;
     private Integer sId = -1;
     private TextView dateField;
@@ -38,7 +39,6 @@ public class AddProduct extends Activity{
         priceField = (EditText) findViewById(R.id.priceField);
         dateField = (TextView) findViewById(R.id.editDate);
         nameField.requestFocus();
-        saveButton = (Button) findViewById(R.id.saveButton);
 
         final Calendar c = Calendar.getInstance();
         int mYear = c.get(Calendar.YEAR);
@@ -47,6 +47,8 @@ public class AddProduct extends Activity{
         date = c.getTime();
         //dateField.setText(mDay + "-" + (mMonth + 1) + "-" + mYear);
         dateField.setText(Constants.formatDate(date, this));
+
+        Button saveAndNewBtt = (Button) findViewById(R.id.saveContinuousButton);
         try {
             Bundle extras = getIntent().getExtras();
             sId = Integer.valueOf(extras.getString("id"));
@@ -56,9 +58,31 @@ public class AddProduct extends Activity{
             nameField.setText(x.getName());
             priceField.setText(String.valueOf(x.getPrice()));
             dateField.setText(Constants.formatDate(x.getModifiedOn(), this));
+            saveAndNewBtt.setVisibility(View.GONE);
         } catch (Exception a){
         }
+        saveButton = (Button) findViewById(R.id.saveButton);
         saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            if (!validInputChecks()) {
+                return;
+            };
+            //date = Utils.strDateToDate(dateField.getText().toString());
+            if (sId == -1) {
+                if (!validChecks()) {
+                    return;
+                };
+                storeReportData();
+            } else {
+                updateReport(sId);
+            }
+            finish();
+            }
+        });
+
+        saveContinuousButton = (Button) findViewById(R.id.saveContinuousButton);
+        saveContinuousButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!validInputChecks()) {
@@ -73,7 +97,9 @@ public class AddProduct extends Activity{
                 } else {
                     updateReport(sId);
                 }
-                finish();
+               priceField.setText("");
+               nameField.setText("");
+               nameField.requestFocus();
             }
         });
 

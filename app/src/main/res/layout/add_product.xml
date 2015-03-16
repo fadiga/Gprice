@@ -22,19 +22,30 @@
             android:imeOptions="actionDone" />
 
         <TextView
+            style="@android:style/Widget.Holo.Spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@android:style/Widget.Holo.Spinner"
             android:id="@+id/editDate"
             android:layout_margin="10dp" />
 
-        <Button
-            style="@style/button"
-            android:bottomRightRadius="10dp"
-            android:bottomLeftRadius="10dp"
-            android:topLeftRadius="10dp"
-            android:topRightRadius="10dp"
-            android:text="Enregistrer"
-            android:id="@+id/saveButton" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="74dp"
+            android:orientation="horizontal"
+            android:layout_weight="3.30">
+            <Button
+                style="@style/button"
+                android:text="Enregistrer"
+                android:id="@+id/saveButton"
+                android:layout_weight="0.50"
+                android:layout_height="match_parent" />
+            <Button
+                style="@style/button"
+                android:text="Enregistrer et nouveau"
+                android:id="@+id/saveContinuousButton"
+                android:layout_weight="0.50"
+                android:layout_height="match_parent" />
+        </LinearLayout>
     </LinearLayout>
+
 </ScrollView>
