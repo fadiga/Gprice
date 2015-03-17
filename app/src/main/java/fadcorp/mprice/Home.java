@@ -58,8 +58,6 @@ public class Home extends Utils {
         addProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                /*Intent a = new Intent(Home.this, AddProduct.class);
-                startActivity(a);*/
                 EditAndAddDialog editAndAddDialog = new EditAndAddDialog(Home.this, -1);
                 editAndAddDialog.show();
             }

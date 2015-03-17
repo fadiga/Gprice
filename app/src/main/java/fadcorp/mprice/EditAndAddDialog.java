@@ -3,7 +3,6 @@ package fadcorp.mprice;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -30,10 +29,13 @@ public class EditAndAddDialog extends Dialog{
     private TextView dateField;
     private ReportData oldReport;
     private boolean next;
+    Context context_;
 
     public EditAndAddDialog(Context context, long articleId) {
         super(context);
         sId = articleId;
+        context_ = context;
+
         try {
             oldReport = ReportData.findById(ReportData.class, sId);
             setTitle("Mise à jour de " + oldReport.getName());
@@ -108,20 +110,18 @@ public class EditAndAddDialog extends Dialog{
         if (!validInputChecks()) { return; };
         if (!validDuplicateChecks()) { return; };
         if (oldReport == null) {
-            Log.d(TAG, "oldReport null");
             storeReportData();
         } else {
-            Log.d(TAG, "oldReport " + oldReport.getName());
             updateReport(oldReport);
         }
-        nameField.setText("");
-        nameField.requestFocus();
-        priceField.setText("");
         if (!next){
             dismiss();
+            ((Home) context_).onResume();
+        } else {
+            nameField.setText("");
+            nameField.requestFocus();
+            priceField.setText("");
         }
-        Intent a = new Intent(getContext(), Home.class);
-        getContext().startActivity(a);
     }
     protected void storeReportData() {
        ReportData report = new ReportData(date,
@@ -161,9 +161,8 @@ public class EditAndAddDialog extends Dialog{
         String value = Utils.stringFromField(nameField).toLowerCase();
         List rpt = ReportData.find(ReportData.class, "name = ?", value);
         if(oldReport != null) {
-            Log.d(TAG, "oldReport null");
-            if(oldReport.getName() == value){
-                Log.d(TAG, " oldReport null" + oldReport.getName() +" "+ value);
+            Log.d(TAG, oldReport.getName() + "et" + value);
+            if(oldReport.getName().equals(value)){
                 return true;
             }
         }
