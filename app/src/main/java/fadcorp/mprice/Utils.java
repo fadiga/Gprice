@@ -1,6 +1,7 @@
 package fadcorp.mprice;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -16,7 +17,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.channels.FileChannel;
@@ -32,7 +32,8 @@ import java.util.Locale;
 public class Utils extends Activity{
 
     private static final String TAG = Constants.getLogTag("Utils");
-
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+    /*
     public static void copyFile(FileInputStream fromFile, FileOutputStream toFile) throws IOException {
         FileChannel fromChannel = null;
         FileChannel toChannel = null;
@@ -52,22 +53,16 @@ public class Utils extends Activity{
             }
         }
     }
-
     private static void copyFile(InputStream in, OutputStream out) throws IOException {
         byte[] buffer = new byte[1024];
         int read;
         while((read = in.read(buffer)) != -1){
             out.write(buffer, 0, read);
         }
-    }
-    /*
-    http://rate-exchange.appspot.com/currency?from=EUR&to=XOF&q=12
-     */
+    }*/
     public static String formatUrl(String from, String to, String value){
         return String.format("http://rate-exchange.appspot.com/currency?from=%s&to=%s&q=%s", from, to, value);
     }
-
-
     public static String getFromUrl(String strUrl) throws IOException {
         String data = "";
         InputStream iStream = null;
@@ -103,7 +98,6 @@ public class Utils extends Activity{
         }
         return data;
     }
-
     public static ProgressDialog getStandardProgressDialog(Activity activity,
                                                            String title,
                                                            String message,
@@ -115,6 +109,20 @@ public class Utils extends Activity{
         progressDialog.setCancelable(cancelable);
         return progressDialog;
     }
+    /*
+    public static AlertDialog motification(Activity activity, String title, String message) {
+
+        AlertDialog alertD= new AlertDialog(activity);
+            alertD.setTitle(title);
+            alertD.setMessage(message);
+            alertD.show();
+        return alertD;
+    } */
+
+    public static void motification(Activity activity, String title, String message) {
+        new AlertDialog.Builder(activity).setTitle(title)
+                .setMessage(message).show();
+    }
 
     public static boolean isOnline(Activity activity) {
         ConnectivityManager cm = (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -124,17 +132,14 @@ public class Utils extends Activity{
         }
         return false;
     }
-
     public static void toast (Context context , int msg) {
         Toast toast = Toast.makeText(context, msg, Toast.LENGTH_SHORT);
         //toast.setGravity(Gravity.BOTTOM|Gravity.CENTER, 0, 0);
         toast.show();
     }
-
     public static Date strDateToDate(String strDate) {
 
         Log.d(TAG, " StrDate" + strDate);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         Date date = new Date();
         try {
             date = dateFormat.parse(strDate.replace("T", " "));
@@ -143,23 +148,16 @@ public class Utils extends Activity{
         }
         return date;
     }
-
     public static String dateTostrDate(Date date) {
-
-        SimpleDateFormat timeFormat = new SimpleDateFormat("dd-MM-yyyy");
-        String finalDate = timeFormat.format(date);
-
+        String finalDate = dateFormat.format(date);
         return finalDate;
     }
-
-    public static String getDefaultCurrencyFormat(float value)
-    {
+    public static String getDefaultCurrencyFormat(float value) {
         NumberFormat nf = NumberFormat.getNumberInstance(Locale.getDefault());
         nf.setGroupingUsed(true);
         nf.setMaximumFractionDigits(3);
         return nf.format(value);
     }
-
     public static void copyFile(Activity context, File from, File to) {
         try {
             FileChannel src = new FileInputStream(from).getChannel();
@@ -171,7 +169,6 @@ public class Utils extends Activity{
             Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show();
         }
     }
-
     protected static float floatFromField(EditText editText) {
         return floatFromField(editText, -1);
     }

@@ -36,8 +36,7 @@
         android:entries="@array/settings_money_type"
         android:entryValues="@array/settings_money_type_value"
         android:layout_toRightOf="@+id/editText"
-        android:layout_toEndOf="@+id/editText"
-        android:layout_below="@+id/textView" />
+        android:layout_toEndOf="@+id/editText"/>
 
     <ProgressBar
         style="?android:attr/progressBarStyleSmall"

@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
@@ -33,9 +34,7 @@ public class Home extends Utils {
 
     private ProductElementsAdapter mAdapter;
 
-    // TODO add page of the actuality https://fr.finance.yahoo.com/actualites/categorie-devises/?format=rss
     // TODO automatical backup online
-    // TODO correction selected devise in preference
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
@@ -72,12 +71,28 @@ public class Home extends Utils {
 
     public void setupUI() {
 
+        Log.i(TAG, "setupUI");
         mListView = (ListView)findViewById(R.id.listProd);
         ProductElement productElement;
         ArrayList<ProductElement> productElements = new ArrayList<ProductElement>();
         List<ReportData> productDataList;
         productDataList = Select.from(ReportData.class).orderBy("name").list();
 
+        LinearLayout r = (LinearLayout)findViewById(R.id.is_empty_id);
+        try{
+            productDataList.get(0);
+            r.setVisibility(View.GONE);
+        } catch (Exception e){
+            Log.d(TAG, e.toString());
+            View addBtt = r.findViewById(R.id.addBtt);
+            addBtt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    EditAndAddDialog editAndAddDialog = new EditAndAddDialog(Home.this, -1);
+                    editAndAddDialog.show();
+                }
+            });
+        }
         try {
             for (ReportData prod : productDataList) {
                 productElement = new ProductElement();
@@ -115,6 +130,20 @@ public class Home extends Utils {
         if (id == R.id.action_settings) {
             Intent a = new Intent(Home.this, Preferences.class);
             startActivity(a);
+        }
+        /*if (id == R.id.action_scanne) {
+            Intent a = new Intent(Home.this, ScannerCodeBarre.class);
+            startActivity(a);
+        }*/
+        if (id == R.id.convert_devise) {
+
+            boolean isOnline = Utils.isOnline(Home.this);
+            if (!isOnline) {
+                Utils.toast(getApplicationContext(), R.string.required_connexion_body);
+            } else {
+                Intent a = new Intent(Home.this, ConvirtDevise.class);
+                startActivity(a);
+            }
         }
         if (id == R.id.about) {
             Intent a = new Intent(Home.this, About.class);

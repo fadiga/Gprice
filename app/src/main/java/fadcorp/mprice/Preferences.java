@@ -9,7 +9,6 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.text.format.Time;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.orm.SugarContext;
 
@@ -34,14 +33,11 @@ public class Preferences extends PreferenceActivity {
         packageName = getPackageName();
 
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        String username = sharedPrefs.getString("username", "");
         String passwork = sharedPrefs.getString("passwork", "");
         String moneyType = sharedPrefs.getString("moneyType", null);
 
         SharedPreferences.Editor editor = sharedPrefs.edit();
-        editor.putString("username", "");
         editor.putString("passwork", "");
-        //editor.putString("moneyType", moneyType);
         editor.apply();
         addPreferencesFromResource(R.xml.preferences);
         final Preference restBtt = (Preference)findPreference("restDB");
@@ -69,7 +65,7 @@ public class Preferences extends PreferenceActivity {
         exportBtt.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                exportDatabse();
+                exportDatabse(true);
                 return false;
             }
         });
@@ -86,7 +82,7 @@ public class Preferences extends PreferenceActivity {
 
     //importing database
     private void importDB() {
-        exportDatabse();
+        exportDatabse(false);
         File mPath = new File(Environment.getExternalStorageDirectory() + "//DIR//");
         FileDialog fileDialog = new FileDialog(this, mPath);
         fileDialog.setFileEndsWith(".db");
@@ -94,13 +90,13 @@ public class Preferences extends PreferenceActivity {
             public void fileSelected(File file) {
                 Log.d(TAG, "selected file " + file.toString());
                 Utils.copyFile(Preferences.this, file, currentDB);
-                Toast.makeText(getBaseContext(), databaseName + " a été importée avec succès depuis \n" + file.getAbsolutePath(), Toast.LENGTH_LONG).show();
+            Utils.motification(Preferences.this, "", String.format(getBaseContext().getString(R.string.importOk, databaseName, file.getAbsolutePath())));
             }
         });
         fileDialog.showDialog();
     }
     //exporting database
-    public void exportDatabse() {
+    public void exportDatabse(boolean motif) {
         File sd = Environment.getExternalStorageDirectory();
 
         if (!sd.canWrite()) {
@@ -117,10 +113,11 @@ public class Preferences extends PreferenceActivity {
         String backupDBName = String.format("backup-%s.db", dateNow);
         File backupDB = new File(backupDir, backupDBName);
 
-        Log.d(TAG,  currentDB + " " + currentDB.exists());
+        Log.d(TAG, currentDB + " " + currentDB.exists());
         Utils.copyFile(this, currentDB, backupDB);
-        Toast.makeText(getBaseContext(), databaseName + " a été exportée avec succès dans \n" + backupDB.getAbsolutePath(), Toast.LENGTH_LONG).show();
-
+        if(motif) {
+            Utils.motification(Preferences.this, "", String.format(getBaseContext().getString(R.string.exportOk, databaseName, backupDB.getAbsolutePath())));
+        }
     }
     public void restDatabase (String databaseName) {
         SugarContext.terminate();
@@ -130,8 +127,6 @@ public class Preferences extends PreferenceActivity {
                 .getLaunchIntentForPackage(getBaseContext().getPackageName());
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
-        Toast.makeText(getBaseContext(), databaseName +
-                " a été supprimée avec succès", Toast.LENGTH_LONG).show();
+        Utils.motification(Preferences.this, "", String.format(getBaseContext().getString(R.string.delDB, databaseName)));
     }
-
 }

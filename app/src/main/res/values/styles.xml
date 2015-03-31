@@ -12,6 +12,10 @@
         <item name="android:layout_margin">5dp</item>
         <!-- <item name="android:background">@color/abc_search_url_text_normal</item> -->
     </style>
+    <style name="textViewPrix">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
     <style name="editNumberText" parent="editText">
         <item name="android:inputType">number</item>
     </style>
@@ -27,10 +31,24 @@
         <item name="android:editable">true</item>
         <!-- <item name="android:background">@color/abc_search_url_text_pressed</item> -->
     </style>
-    <style name="button">
-        <item name="android:layout_width">match_parent</item>
+    <style name="button1">
+        <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:background">#7BA181</item>
-        <item name="android:layout_margin">5dp</item>
+        <item name="android:layout_margin">90dp</item>
+        <item name="android:padding">10dp</item>
+    </style>
+    <style name="button" >
+        <!--<item name="android:layout_margin">90dp</item> -->
+        <item name="android:layout_width" >wrap_content</item>
+        <item name="android:layout_height" >wrap_content</item>
+        <!-- <item name="android:textColor" >#FEEE</item> -->
+        <item name="android:gravity" >center</item>
+        <!-- <item name="android:textSize" >30dp</item> -->
+        <item name="android:textStyle" >bold</item>
+        <item name="android:shadowColor" >#656060</item>
+        <item name="android:shadowDx" >1</item>
+        <item name="android:shadowDy" >1</item>
+        <item name="android:shadowRadius" >10</item>
     </style>
 </resources>

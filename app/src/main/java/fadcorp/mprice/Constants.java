@@ -14,6 +14,8 @@ public class Constants {
 
     public static final String databaseName = "Mprice.db";
 
+    public static final String facebook = "com.facebook.katana";
+
     public static final String getLogTag(String activity) {
         return String.format("MPLog-%s", activity);
     }

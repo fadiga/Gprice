@@ -11,7 +11,6 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Filter;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -25,6 +24,7 @@ public class ProductElementsAdapter extends BaseAdapter {
     private ArrayList<ProductElement> productElements;
     private ArrayList<ProductElement> productElementsOrigin;
     private ItemFilter mFilter = new ItemFilter();
+    private TextView devise;
 
     public ProductElementsAdapter(Context context, ArrayList<ProductElement> productElements) {
         this.context = context;
@@ -56,17 +56,19 @@ public class ProductElementsAdapter extends BaseAdapter {
         }
 
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
-        final String to = sharedPrefs.getString("moneyType", "XOF");
+        final String to = sharedPrefs.getString("moneyType", "Fcfa");
         final float priceValue = productElements.get(position).getPrice();
         TextView nameProduct = (TextView)convertView.findViewById(R.id.nameProduct);
         nameProduct.setText(productElements.get(position).getName());
         final TextView priceField = (TextView)convertView.findViewById(R.id.priceValue);
-        priceField.setText(Utils.getDefaultCurrencyFormat(priceValue) + " " + to );
+        priceField.setText(Utils.getDefaultCurrencyFormat(priceValue));
+        devise = (TextView) convertView.findViewById(R.id.devise);
+        devise.setText(to);
         TextView date = (TextView)convertView.findViewById(R.id.dateP);
         date.setText(productElements.get(position).getModifiedOn());
-        ImageView image = (ImageView) convertView.findViewById(R.id.editProd);
+        //ImageView image = (ImageView) convertView.findViewById(R.id.editProd);
         final long prodId = productElements.get(position).getProdId();
-        image.setOnClickListener(new View.OnClickListener() {
+        nameProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 EditAndAddDialog editAndAddDialog = new EditAndAddDialog(context, prodId);
@@ -104,7 +106,7 @@ public class ProductElementsAdapter extends BaseAdapter {
                     }
                 });
 
-                dialog.show();
+                //dialog.show();
             }
         });
         /*ImageView image = (ImageView) convertView.findViewById(R.id.tagImage);
@@ -125,25 +127,19 @@ public class ProductElementsAdapter extends BaseAdapter {
         protected FilterResults performFiltering(CharSequence constraint) {
 
             String filterString = constraint.toString().toLowerCase();
-
             FilterResults results = new FilterResults();
-
             final ArrayList<ProductElement> list = productElementsOrigin;
-
             int count = list.size();
             final ArrayList<ProductElement> nlist = new ArrayList<ProductElement>(count);
-
             ProductElement filterable;
-
             for (int i = 0; i < count; i++) {
                 filterable = list.get(i);
-                if (filterable.getName() .toLowerCase().contains(filterString)) {
+                if (filterable.getName().toLowerCase().contains(filterString)) {
                     nlist.add(filterable);
                 }
             }
             results.values = nlist;
             results.count = nlist.size();
-
             return results;
         }
 

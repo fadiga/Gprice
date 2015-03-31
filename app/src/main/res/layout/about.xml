@@ -1,58 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:bootstrapbutton="http://schemas.android.com/apk/res-auto"
     xmlns:bootstrap="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:clickable="false">
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:id="@+id/scrollView"
+    android:background="#ffffffff">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/scrollView"
-        style="@android:style/Animation.Translucent"
-        android:layout_above="@+id/versionButton">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="10dp"
-        android:paddingBottom="10dp">
+        android:orientation="horizontal"
+        android:gravity="right">
         <TextView
-            android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:id="@+id/appLongDescriptionLabel"
-             android:linksClickable="true"
-            android:textIsSelectable="true"
-            android:textSize="17sp"
-            android:gravity="center_horizontal|left"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"/>
+            android:id="@+id/versionButton"
+            android:layout_width="wrap_content"
+            android:text="v 1.0"
+            android:layout_height="wrap_content"
+            android:background="@android:drawable/editbox_background_normal"
+            android:layout_margin="5dp"
+            android:textColor="#000000" />
 
-        <TextView
-            android:text=""
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/share"
+            android:background="@android:drawable/ic_menu_share"
+            android:layout_below="@+id/scrollView"
+            android:layout_alignBottom="@+id/versionButton"
+            android:adjustViewBounds="false"
+            android:layout_margin="5dp" />
+    </LinearLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:paddingBottom="10dp"
+        android:weightSum="1">
+        <WebView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/autor"
-             android:linksClickable="true"
-            android:textIsSelectable="true"
-            android:textSize="15dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
-
-    </LinearLayout>
+            android:id="@+id/webView">
+        </WebView>
     </ScrollView>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:text="Success"
-        android:id="@+id/versionButton"
-        android:imeOptions="actionGo"
-        android:gravity="center|center_vertical"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
-
-</RelativeLayout>
+</LinearLayout>

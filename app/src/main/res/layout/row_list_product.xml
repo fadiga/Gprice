@@ -14,42 +14,56 @@
         android:textStyle="bold"
         android:layout_gravity="bottom"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="produit D110 gggggggggggggg g     r rrrrrr"
-        android:layout_alignTop="@+id/editProd"
-        android:layout_alignRight="@+id/priceValue"
-        android:layout_alignEnd="@+id/priceValue"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentLeft="false"
         android:layout_alignParentStart="true"
-        android:layout_marginLeft="5dp" />
+        android:text=" Roulement 110 distant de bamako Mali"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="5dp" />
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/textViewPrix"
         android:id="@+id/priceValue"
-        android:textStyle="bold"
         android:text="1000"
-        android:gravity="end"
-        android:layout_toStartOf="@+id/editProd"
-        android:layout_below="@+id/nameProduct" />
+        android:layout_alignBottom="@+id/dateP"
+        android:layout_toLeftOf="@+id/devise"
+        android:layout_toStartOf="@+id/devise"
+        android:layout_alignParentBottom="false"
+        android:gravity="bottom" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="12/11/2014"
         android:id="@+id/dateP"
         android:gravity="center_horizontal|end"
-        android:layout_below="@+id/nameProduct"
-        android:layout_alignLeft="@+id/nameProduct"
-        android:layout_alignStart="@+id/nameProduct" />
+        android:layout_marginLeft="5dp"
+        android:layout_below="@+id/nameProduct" />
 
-    <ImageView
-        android:id="@+id/editProd"
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@android:drawable/ic_menu_edit"
-        android:focusable="false"
-        android:layout_alignParentTop="false"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Fcfa"
+        android:id="@+id/devise"
         android:layout_alignParentRight="false"
         android:layout_alignParentEnd="true"
-        android:layout_marginRight="5dp" />
+        android:layout_alignBottom="@+id/priceValue"
+        android:layout_alignParentBottom="false"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_alignTop="@+id/priceValue"
+        android:gravity="center_vertical|bottom" />
 
+    <!--<ImageView
+         android:id="@+id/editProd"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:src="@android:drawable/ic_menu_edit"
+         android:focusable="false"
+         android:layout_alignParentTop="false"
+         android:layout_alignParentRight="false"
+         android:layout_alignParentEnd="true"
+         android:layout_marginRight="5dp"
+         android:layout_above="@+id/priceValue" />
+     -->
 </RelativeLayout>
 

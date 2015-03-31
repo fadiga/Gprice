@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * Created by fad on 28/11/14.
  */
-public class EditAndAddDialog extends Dialog{
+public class EditAndAddDialog extends Dialog {
     private static final String TAG =  Constants.getLogTag("EditAndAddDialog");
     private EditText nameField;
     private EditText priceField;
@@ -44,14 +44,12 @@ public class EditAndAddDialog extends Dialog{
             setTitle("Nouvel acticle");
         }
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_product);
         setupUI();
     }
-
     protected void setupUI() {
 
         nameField = (EditText) findViewById(R.id.nameField);
@@ -72,7 +70,6 @@ public class EditAndAddDialog extends Dialog{
             priceField.setText(String.valueOf(oldReport.getPrice()));
             dateField.setText(Constants.formatDate(oldReport.getModifiedOn(), getContext()));
             saveAndNewBtt.setVisibility(View.GONE);
-
         }
         saveButton = (Button) findViewById(R.id.saveButton);
         saveButton.setOnClickListener(new View.OnClickListener() {
@@ -116,21 +113,21 @@ public class EditAndAddDialog extends Dialog{
         }
         if (!next){
             dismiss();
-            ((Home) context_).onResume();
         } else {
             nameField.setText("");
             nameField.requestFocus();
             priceField.setText("");
         }
+        ((Home) context_).setupUI();
     }
     protected void storeReportData() {
        ReportData report = new ReportData(date,
-                Utils.stringFromField(nameField).toLowerCase(),
+                Utils.stringFromField(nameField),
                 Utils.floatFromField(priceField));
        report.save();
     }
     protected void updateReport(ReportData rpt) {
-        rpt.setName(Utils.stringFromField(nameField).toLowerCase());
+        rpt.setName(Utils.stringFromField(nameField));
         rpt.setPrice(Utils.floatFromField(priceField));
         rpt.setModifiedOn(date);
         rpt.save();
@@ -157,9 +154,10 @@ public class EditAndAddDialog extends Dialog{
         return assertNotEmpty(nameField) && assertNotEmpty(priceField);
     }
     protected boolean validDuplicateChecks() {
-            Log.d(TAG, "validDuplicateChecks");
+        Log.d(TAG, "validDuplicateChecks");
         String value = Utils.stringFromField(nameField).toLowerCase();
         List rpt = ReportData.find(ReportData.class, "name = ?", value);
+
         if(oldReport != null) {
             Log.d(TAG, oldReport.getName() + "et" + value);
             if(oldReport.getName().equals(value)){
