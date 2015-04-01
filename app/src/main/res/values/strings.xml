@@ -31,7 +31,6 @@
     <string name="action_settings">Configuration</string>
     <string name="manage_db">Gestion base de données</string>
     <string name="default_devise">Fcfa</string>
-
     <string name="rest_database">Suppression des données.</string>
     <string name="rest_confermed">"Êtes-vous certain?"</string>
     <string name="advanced">Paramètres avancés</string>

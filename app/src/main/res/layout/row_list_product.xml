@@ -6,29 +6,29 @@
     android:id="@+id/rowLinearLayout"
     android:orientation="horizontal">
     <TextView
+        style="@style/textViewLabel"
         android:id="@+id/nameProduct"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:clickable="false"
         android:autoText="false"
-        android:textStyle="bold"
         android:layout_gravity="bottom"
-        android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_alignParentLeft="false"
         android:layout_alignParentStart="true"
-        android:text=" Roulement 110 distant de bamako Mali"
-        android:layout_alignParentRight="true"
+        android:text="Roulement 110 distant de bamako Mali"
+        android:layout_alignParentRight="false"
         android:layout_alignParentEnd="true"
-        android:layout_margin="5dp" />
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp" />
     <TextView
         style="@style/textViewPrix"
         android:id="@+id/priceValue"
         android:text="1000"
+        android:layout_alignBaseline="@+id/dateP"
         android:layout_alignBottom="@+id/dateP"
         android:layout_toLeftOf="@+id/devise"
         android:layout_toStartOf="@+id/devise"
-        android:layout_alignParentBottom="false"
-        android:gravity="bottom" />
+        android:gravity="center"
+        android:padding="1dp" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -44,14 +44,10 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Fcfa"
         android:id="@+id/devise"
-        android:layout_alignParentRight="false"
-        android:layout_alignParentEnd="true"
-        android:layout_alignBottom="@+id/priceValue"
-        android:layout_alignParentBottom="false"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_alignTop="@+id/priceValue"
-        android:gravity="center_vertical|bottom" />
+        android:layout_alignBaseline="@+id/priceValue"
+        android:layout_alignEnd="@+id/nameProduct"
+        android:textStyle="italic"
+        android:textSize="10dp" />
 
     <!--<ImageView
          android:id="@+id/editProd"
