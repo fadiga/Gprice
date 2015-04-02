@@ -66,6 +66,7 @@ public class EditAndAddDialog extends Dialog {
 
         Button saveAndNewBtt = (Button) findViewById(R.id.saveContinuousButton);
         if(oldReport != null) {
+            date = oldReport.getModifiedOn();
             nameField.setText(oldReport.getName());
             priceField.setText(String.valueOf(oldReport.getPrice()));
             dateField.setText(Constants.formatDate(oldReport.getModifiedOn(), getContext()));
