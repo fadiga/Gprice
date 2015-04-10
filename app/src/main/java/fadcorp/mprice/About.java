@@ -67,7 +67,7 @@ public class About extends Activity {
                     public void onClick(View v) {
                         Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
                         sharingIntent.setType("text/plain");
-                        String shareBody = "https://play.google.com/store/apps/details?id=com.malisante.fad.ebolamali&hl=fr";
+                        String shareBody = Constants.share;
                         sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, R.string.app_name);
                         sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
                         startActivity(Intent.createChooser(sharingIntent, "Partager ..."));
