@@ -44,13 +44,15 @@
         <activity
             android:name=".Preferences"
             android:screenOrientation="portrait"
-            android:label="@string/app_name" >
-        </activity>
+            android:label="@string/app_name" />
         <activity
             android:name=".ConvirtDevise"
             android:screenOrientation="portrait"
-            android:label="@string/app_name" >
-        </activity>
+            android:label="@string/app_name" />
+        <activity
+            android:name=".BarcodeScan"
+            android:screenOrientation="portrait"
+            android:label="@string/app_name" />
     </application>
 
 </manifest>

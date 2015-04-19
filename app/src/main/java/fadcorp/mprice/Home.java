@@ -131,10 +131,10 @@ public class Home extends Utils {
             Intent a = new Intent(Home.this, Preferences.class);
             startActivity(a);
         }
-        /*if (id == R.id.action_scanne) {
-            Intent a = new Intent(Home.this, ScannerCodeBarre.class);
+        if (id == R.id.action_scan) {
+            Intent a = new Intent(Home.this, BarcodeScan.class);
             startActivity(a);
-        }*/
+        }
         if (id == R.id.convert_devise) {
 
             boolean isOnline = Utils.isOnline(Home.this);
