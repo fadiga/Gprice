@@ -68,45 +68,12 @@ public class ProductElementsAdapter extends BaseAdapter {
         date.setText(productElements.get(position).getModifiedOn());
         //ImageView image = (ImageView) convertView.findViewById(R.id.editProd);
         final long prodId = productElements.get(position).getProdId();
+        final String barCode = productElements.get(position).getBarCode();
         nameProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditAndAddDialog editAndAddDialog = new EditAndAddDialog(context, prodId);
+                EditAndAddDialog editAndAddDialog = new EditAndAddDialog(context, prodId, barCode);
                 editAndAddDialog.show();
-            }
-        });
-        priceField.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View v) {
-                final String from = "Eur";
-
-                final Dialog dialog = new Dialog(context);
-                dialog.setContentView(R.layout.devises);
-                dialog.setTitle("Conversion de " + to);
-                ProgressBar prog = (ProgressBar) dialog.findViewById(R.id.progressBar);
-                prog.setVisibility(View.GONE);
-                //TextView title = (TextView) dialog.findViewById(R.id.textViewDialog);
-                //title.setText();
-                final EditText amontField = (EditText) dialog.findViewById(R.id.editText);
-                amontField.setText(Float.toString(priceValue));
-                Button dialogBttOK = (Button) dialog.findViewById(R.id.dialogButtonOK);
-                dialogBttOK.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        new GetJsonDevises((android.app.Activity) context, dialog).execute(from,
-                                to, String.valueOf(Utils.floatFromField(amontField)));
-                    }
-                });
-                Button dialogBttCancel = (Button) dialog.findViewById(R.id.dialogButtonCancel);
-                dialogBttCancel.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });
-
-                //dialog.show();
             }
         });
         /*ImageView image = (ImageView) convertView.findViewById(R.id.tagImage);

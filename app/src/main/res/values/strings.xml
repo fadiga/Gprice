@@ -40,4 +40,5 @@
     <string name="importOk" formatted="false">%s a été importée avec succès depuis \n %s</string>
     <string name="exportOk" formatted="false">%s a été exportée avec succès sur \n %s</string>
     <string name="delDB">%s a été supprimée avec succès.</string>
+    <string name="scanne_bar_code">Scanner le code barre</string>
 </resources>

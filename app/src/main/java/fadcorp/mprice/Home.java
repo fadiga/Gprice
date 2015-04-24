@@ -30,7 +30,6 @@ public class Home extends Utils {
     private static final String TAG = Constants.getLogTag("Home");
     private ListView mListView;
     private EditText search;
-    private SimpleAdapter adapter;
 
     private ProductElementsAdapter mAdapter;
 
@@ -57,7 +56,7 @@ public class Home extends Utils {
         addProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                EditAndAddDialog editAndAddDialog = new EditAndAddDialog(Home.this, -1);
+                EditAndAddDialog editAndAddDialog = new EditAndAddDialog(Home.this, -1, null);
                 editAndAddDialog.show();
             }
         });
@@ -88,7 +87,7 @@ public class Home extends Utils {
             addBtt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    EditAndAddDialog editAndAddDialog = new EditAndAddDialog(Home.this, -1);
+                    EditAndAddDialog editAndAddDialog = new EditAndAddDialog(Home.this, -1, null);
                     editAndAddDialog.show();
                 }
             });
@@ -99,6 +98,7 @@ public class Home extends Utils {
                 productElement.setProdId(prod.getId());
                 productElement.setPrice(prod.getPrice());
                 productElement.setName(prod.getName());
+                productElement.setBarCode(prod.getBarCode());
                 productElement.setModifiedOn(Constants.formatDate(prod.getModifiedOn(), this));
                 productElements.add(productElement);
             }

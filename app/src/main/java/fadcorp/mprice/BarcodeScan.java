@@ -10,12 +10,18 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
+
+import com.orm.query.Condition;
+import com.orm.query.Select;
+
+import java.util.List;
+
 /**
  * Created by fad on 14/04/15.
  */
 public class BarcodeScan extends Activity {
     /** Called when the activity is first created. */
-    static final String TAG = "ScannerLog";
+    private static final String TAG =  Constants.getLogTag("ScannerLog");
     static final String ACTION_SCAN = "com.google.zxing.client.android.SCAN";
 
     @Override
@@ -75,7 +81,19 @@ public class BarcodeScan extends Activity {
             if (resultCode == RESULT_OK) {
                 String contents = intent.getStringExtra("SCAN_RESULT");
                 String format = intent.getStringExtra("SCAN_RESULT_FORMAT");
-                showDialog(BarcodeScan.this, "Content", contents, "Yes", "No").show();
+                ReportData rpt = Select.from(ReportData.class)
+                                         .where(Condition.prop("BAR_CODE").eq(contents)).first();
+                try {
+                    NotificationDiag notf = new NotificationDiag(BarcodeScan.this, rpt.getId(),
+                                                                        rpt.getName(), rpt.getPrice(),
+                                                                        rpt.getModifiedOn());
+                    notf.setCancelable(false);
+                    notf.show();
+                } catch (Exception e) {
+                    Log.e(TAG, e.toString());
+                    EditAndAddDialog editAndAddDialog = new EditAndAddDialog(BarcodeScan.this, -1, contents);
+                    editAndAddDialog.show();
+                }
             }
         }
     }

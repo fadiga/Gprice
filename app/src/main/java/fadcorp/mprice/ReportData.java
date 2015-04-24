@@ -13,15 +13,19 @@ public class ReportData extends SugarRecord {
     private String name;
     private Date modifiedOn;
     private float price;
+    private String barCode;
 
     public ReportData() {
     }
 
-    public ReportData(Date modifiedOn, String name, float price) {
+    public ReportData(Date modifiedOn, String name, float price, String  barCode) {
         this.modifiedOn = modifiedOn;
         this.name = name;
         this.price = price;
+        this.barCode = barCode;
     }
+
+    public void setBarCode(String barreCode){this.barCode = barreCode;}
 
     public void setModifiedOn(Date date) {
         this.modifiedOn = date;
@@ -45,4 +49,7 @@ public class ReportData extends SugarRecord {
 
     public Date getModifiedOn() {return this.modifiedOn; }
 
+    public String getBarCode() {
+        return this.barCode;
+    }
 }

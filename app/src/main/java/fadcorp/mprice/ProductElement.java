@@ -3,6 +3,7 @@ package fadcorp.mprice;
 public class ProductElement {
     Long prodId;
     String name;
+    String BarCode;
     String modifiedOn;
     float price;
 
@@ -18,10 +19,15 @@ public class ProductElement {
         return name;
     }
 
+    public String getBarCode() {return BarCode;}
+
     public void setName(String name) {
         this.name = name;
     }
 
+    public void setBarCode(String barCode) {
+        BarCode = barCode;
+    }
     public float getPrice() {
         return price;
     }
@@ -33,6 +39,7 @@ public class ProductElement {
     public long getProdId() {
         return prodId;
     }
+
     public void setProdId(Long prodId) {
         this.prodId = prodId;
     }

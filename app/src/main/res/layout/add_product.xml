@@ -28,6 +28,14 @@
             android:id="@+id/editDate"
             android:layout_margin="10dp" />
 
+        <TextView
+            android:layout_width="238dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Small Text"
+            android:id="@+id/barCodeField"
+            android:layout_gravity="center_horizontal"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="74dp"

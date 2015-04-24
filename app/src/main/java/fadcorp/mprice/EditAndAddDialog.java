@@ -20,6 +20,7 @@ import java.util.List;
  */
 public class EditAndAddDialog extends Dialog {
     private static final String TAG =  Constants.getLogTag("EditAndAddDialog");
+    private final String barCodeStr;
     private EditText nameField;
     private EditText priceField;
     private Button saveButton;
@@ -27,14 +28,16 @@ public class EditAndAddDialog extends Dialog {
     private Date date;
     private long sId;
     private TextView dateField;
+    private TextView barCodeField;
     private ReportData oldReport;
     private boolean next;
     Context context_;
 
-    public EditAndAddDialog(Context context, long articleId) {
+    public EditAndAddDialog(Context context, long articleId, String barCode) {
         super(context);
         sId = articleId;
         context_ = context;
+        barCodeStr = barCode;
 
         try {
             oldReport = ReportData.findById(ReportData.class, sId);
@@ -53,9 +56,10 @@ public class EditAndAddDialog extends Dialog {
     protected void setupUI() {
 
         nameField = (EditText) findViewById(R.id.nameField);
+        nameField.requestFocus();
         priceField = (EditText) findViewById(R.id.priceField);
         dateField = (TextView) findViewById(R.id.editDate);
-        nameField.requestFocus();
+        barCodeField = (TextView) findViewById(R.id.barCodeField);
 
         final Calendar c = Calendar.getInstance();
         int mYear = c.get(Calendar.YEAR);
@@ -63,6 +67,9 @@ public class EditAndAddDialog extends Dialog {
         int mDay = c.get(Calendar.DAY_OF_MONTH);
         date = c.getTime();
         dateField.setText(Constants.formatDate(date, getContext()));
+        if (!barCodeField.equals(null)) {
+            barCodeField.setText("Code: " + barCodeStr);
+        }
 
         Button saveAndNewBtt = (Button) findViewById(R.id.saveContinuousButton);
         if(oldReport != null) {
@@ -124,13 +131,15 @@ public class EditAndAddDialog extends Dialog {
     protected void storeReportData() {
        ReportData report = new ReportData(date,
                 Utils.stringFromField(nameField),
-                Utils.floatFromField(priceField));
+                Utils.floatFromField(priceField),
+                barCodeStr);
        report.save();
     }
     protected void updateReport(ReportData rpt) {
         rpt.setName(Utils.stringFromField(nameField));
         rpt.setPrice(Utils.floatFromField(priceField));
         rpt.setModifiedOn(date);
+        //rpt.setBarCode("");
         rpt.save();
     }
     protected void addErrorToField(EditText editText, String message) {
