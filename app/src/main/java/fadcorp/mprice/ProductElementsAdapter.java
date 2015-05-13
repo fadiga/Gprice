@@ -1,17 +1,14 @@
 package fadcorp.mprice;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Filter;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -58,7 +55,7 @@ public class ProductElementsAdapter extends BaseAdapter {
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
         final String to = sharedPrefs.getString("moneyType", "Fcfa");
         final float priceValue = productElements.get(position).getPrice();
-        TextView nameProduct = (TextView)convertView.findViewById(R.id.nameProduct);
+        final TextView nameProduct = (TextView)convertView.findViewById(R.id.nameProduct);
         nameProduct.setText(productElements.get(position).getName());
         final TextView priceField = (TextView)convertView.findViewById(R.id.priceValue);
         priceField.setText(Utils.getDefaultCurrencyFormat(priceValue));
@@ -66,7 +63,6 @@ public class ProductElementsAdapter extends BaseAdapter {
         devise.setText(to);
         TextView date = (TextView)convertView.findViewById(R.id.dateP);
         date.setText(productElements.get(position).getModifiedOn());
-        //ImageView image = (ImageView) convertView.findViewById(R.id.editProd);
         final long prodId = productElements.get(position).getProdId();
         final String barCode = productElements.get(position).getBarCode();
         nameProduct.setOnClickListener(new View.OnClickListener() {
@@ -76,14 +72,20 @@ public class ProductElementsAdapter extends BaseAdapter {
                 editAndAddDialog.show();
             }
         });
-        /*ImageView image = (ImageView) convertView.findViewById(R.id.tagImage);
-         if( position > 1) {
-             image.setImageResource(R.drawable.downicon);
-         }*/
+        TextView delBtt = (TextView) convertView.findViewById(R.id.delete_btt);
+        delBtt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Utils.toast(context, String.format("%s a été suprimé avec succès", productElements.get(position).getName()));
+                ReportData rp = ReportData.findById(ReportData.class, productElements.get(position).getProdId());
+                rp.delete();
+                ((Home) context).setupUI();
+            }
+        });
 
         return convertView;
     }
-
 
     public Filter getFilter() {
         return mFilter;

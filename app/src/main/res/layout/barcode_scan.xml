@@ -1,45 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:id="@+id/container"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="#ffffff"
+      xmlns:tools="http://schemas.android.com/tools"
+      android:id="@+id/container"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
               android:orientation="vertical"
-              tools:context="com.javacodegeeks.androidstartactivityforresultexample.ActivityOne" >
+      tools:context="com.javacodegeeks.androidstartactivityforresultexample.ActivityOne"
+      android:weightSum="1"
+              android:gravity="center">
 
-    <TextView
-        android:id="@+id/textView1"
+    <LinearLayout
+        android:id="@+id/barCodeLayout"
+        android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center|top"
-        android:layout_margin="20dp"
-        android:text="Scan"
-        android:textColor="#000000"
-        android:textSize="30dp" />
-
-    <Button
-        android:id="@+id/scanner"
-        android:layout_width="250dp"
-        android:layout_height="80dp"
-        android:layout_gravity="center"
-        android:layout_margin="10dp"
-        android:gravity="center"
-        android:onClick="scanQR"
-        android:text="QR Code"
-        android:textSize="18dp" >
-    </Button>
-
-    <Button
-        android:id="@+id/scanner2"
-        android:layout_width="250dp"
-        android:layout_height="80dp"
-        android:layout_gravity="center"
-        android:layout_margin="10dp"
-        android:gravity="center"
-        android:onClick="scanBar"
-        android:text="Bar Code"
-        android:textSize="18dp" >
-    </Button>
-
+        android:weightSum="1"
+        android:background="@drawable/abc_popup_background_mtrl_mult"
+        android:gravity="fill_vertical|center_horizontal">
+        <Button
+            android:id="@+id/scanner2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_margin="5dp"/>
+        <TextView
+            android:id="@+id/barCodeLabel"
+            android:layout_width="156dp"
+            android:layout_height="match_parent"
+            android:text="Rescanner code barre"
+            android:gravity="center"
+            android:layout_margin="5dp"/>
+    </LinearLayout>
 </LinearLayout>

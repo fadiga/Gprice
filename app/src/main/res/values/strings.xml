@@ -9,6 +9,7 @@
     <string name="required_connexion_retry">Réessayer</string>
 
     <string name="loading">Chargement en cours ...</string>
+    <string name="del_confird">Chargement en cours ...</string>
     <string name="action_search">recherche</string>
     <string name="app_market_url">market://details?id=fadcorp.mprice</string>
     <string name="version_button_label">V %1$s</string>

@@ -83,15 +83,6 @@ public class Utils extends Activity{
         progressDialog.setCancelable(cancelable);
         return progressDialog;
     }
-    /*
-    public static AlertDialog motification(Activity activity, String title, String message) {
-
-        AlertDialog alertD= new AlertDialog(activity);
-            alertD.setTitle(title);
-            alertD.setMessage(message);
-            alertD.show();
-        return alertD;
-    } */
 
     public static void motification(Activity activity, String title, String message) {
         new AlertDialog.Builder(activity).setTitle(title)
@@ -106,7 +97,7 @@ public class Utils extends Activity{
         }
         return false;
     }
-    public static void toast (Context context , int msg) {
+    public static void toast (Context context , String msg) {
         Toast toast = Toast.makeText(context, msg, Toast.LENGTH_SHORT);
         //toast.setGravity(Gravity.BOTTOM|Gravity.CENTER, 0, 0);
         toast.show();

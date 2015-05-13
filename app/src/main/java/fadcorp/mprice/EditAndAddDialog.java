@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class EditAndAddDialog extends Dialog {
     private static final String TAG =  Constants.getLogTag("EditAndAddDialog");
-    private final String barCodeStr;
+    private String barCodeStr = "null";
     private EditText nameField;
     private EditText priceField;
     private Button saveButton;
@@ -37,7 +37,11 @@ public class EditAndAddDialog extends Dialog {
         super(context);
         sId = articleId;
         context_ = context;
-        barCodeStr = barCode;
+        try {
+            barCodeStr = barCode.toString();
+        } catch (Exception e) {
+            Log.e(TAG, e.toString());
+        }
 
         try {
             oldReport = ReportData.findById(ReportData.class, sId);
@@ -54,7 +58,8 @@ public class EditAndAddDialog extends Dialog {
         setupUI();
     }
     protected void setupUI() {
-
+        Log.d(TAG, "setupUI");
+        Log.d(TAG, "Code Barre : " + barCodeStr);
         nameField = (EditText) findViewById(R.id.nameField);
         nameField.requestFocus();
         priceField = (EditText) findViewById(R.id.priceField);
@@ -67,9 +72,7 @@ public class EditAndAddDialog extends Dialog {
         int mDay = c.get(Calendar.DAY_OF_MONTH);
         date = c.getTime();
         dateField.setText(Constants.formatDate(date, getContext()));
-        if (!barCodeField.equals(null)) {
-            barCodeField.setText("Code: " + barCodeStr);
-        }
+        barCodeField.setText("Code barre : " + barCodeStr);
 
         Button saveAndNewBtt = (Button) findViewById(R.id.saveContinuousButton);
         if(oldReport != null) {
@@ -126,7 +129,9 @@ public class EditAndAddDialog extends Dialog {
             nameField.requestFocus();
             priceField.setText("");
         }
-        ((Home) context_).setupUI();
+        if(barCodeStr.equals("null")) {
+            ((Home) context_).setupUI();
+        }
     }
     protected void storeReportData() {
        ReportData report = new ReportData(date,

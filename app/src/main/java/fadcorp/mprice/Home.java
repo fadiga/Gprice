@@ -61,7 +61,8 @@ public class Home extends Utils {
             }
         });
 
-        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME);
+//        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME);
+        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         setupUI();
         //TelephonyManager tMgr = (TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
         //String mPhoneNumber = tMgr.getLine1Number();
@@ -139,7 +140,7 @@ public class Home extends Utils {
 
             boolean isOnline = Utils.isOnline(Home.this);
             if (!isOnline) {
-                Utils.toast(getApplicationContext(), R.string.required_connexion_body);
+                Utils.toast(getApplicationContext(), getString(R.string.required_connexion_body));
             } else {
                 Intent a = new Intent(Home.this, ConvirtDevise.class);
                 startActivity(a);
