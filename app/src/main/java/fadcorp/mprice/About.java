@@ -36,14 +36,6 @@ public class About extends Activity {
 
         webView = (WebView) findViewById(R.id.webView);
         webView.getSettings().setJavaScriptEnabled(true);
-        /* //Utilisation des variables
-        webView.setWebViewClient(new WebViewClient() {
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                super.onPageFinished(view, url);
-                view.loadUrl(String.format("javascript:replace('vesion', 'V %1$s' )", BuildConfig.VERSION_NAME));
-            }
-        }); */
         webView.loadUrl("file:///android_asset/about.html");
 
         versionButton = (TextView) findViewById(R.id.versionButton);

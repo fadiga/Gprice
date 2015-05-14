@@ -59,7 +59,7 @@ public class EditAndAddDialog extends Dialog {
     }
     protected void setupUI() {
         Log.d(TAG, "setupUI");
-        Log.d(TAG, "Code Barre : " + barCodeStr);
+
         nameField = (EditText) findViewById(R.id.nameField);
         nameField.requestFocus();
         priceField = (EditText) findViewById(R.id.priceField);
@@ -126,8 +126,8 @@ public class EditAndAddDialog extends Dialog {
             dismiss();
         } else {
             nameField.setText("");
-            nameField.requestFocus();
             priceField.setText("");
+            nameField.requestFocus();
         }
         if(barCodeStr.equals("null")) {
             ((Home) context_).setupUI();

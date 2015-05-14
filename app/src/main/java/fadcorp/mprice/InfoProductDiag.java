@@ -15,7 +15,7 @@ import java.util.Date;
 /**
  * Created by fad on 23/04/15.
  */
-public class NotificationDiag extends Dialog{
+public class InfoProductDiag extends Dialog{
     private static final String TAG =  Constants.getLogTag("NotificationDiag");
     private final String sName;
     private final float lPrice;
@@ -28,7 +28,7 @@ public class NotificationDiag extends Dialog{
     private Button okButton;
     private Button updateBtt;
 
-    public NotificationDiag(Context context, Long id, String name, float price, Date date) {
+    public InfoProductDiag(Context context, Long id, String name, float price, Date date) {
         super(context);
         Log.d(TAG, "NotificationDiag");
         ctxt = context;
@@ -42,7 +42,7 @@ public class NotificationDiag extends Dialog{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.price_diag);
+        setContentView(R.layout.info_product_diag);
         setupUI();
 
     }

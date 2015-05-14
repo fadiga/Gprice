@@ -2,6 +2,7 @@ package fadcorp.mprice;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.Button;
@@ -11,11 +12,8 @@ import android.widget.Button;
  */
 public class ConvirtDevise extends Activity {
 
-
     private static final String TAG = Constants.getLogTag("ConvirtDevise");
-    private Button versionButton;
     private WebView webView;
-    boolean isOnline;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +25,7 @@ public class ConvirtDevise extends Activity {
     }
 
     protected void setupUI() {
-
+        Log.d(TAG, "setupUI");
         final Activity activity = this;
         webView = (WebView) findViewById(R.id.webView);
         webView.getSettings().setJavaScriptEnabled(true);

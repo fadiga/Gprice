@@ -77,7 +77,8 @@ public class ProductElementsAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
 
-                Utils.toast(context, String.format("%s a été suprimé avec succès", productElements.get(position).getName()));
+                Utils.toast(context, String.format(context.getString(R.string.succes_deleted),
+                                                          productElements.get(position).getName()));
                 ReportData rp = ReportData.findById(ReportData.class, productElements.get(position).getProdId());
                 rp.delete();
                 ((Home) context).setupUI();

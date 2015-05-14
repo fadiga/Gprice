@@ -1,17 +1,10 @@
 package fadcorp.mprice;
 
-
 import android.content.Context;
-
 import java.util.Date;
 
-public class Constants {
 
-    private final static String TAG = Constants.getLogTag("Constants");
-    public static final String TO = "to";
-    public static final String FROM = "from";
-    public static final String RATE = "rate";
-    public static final String VALUE = "v";
+public class Constants {
 
     public static final String databaseName = "Mprice.db";
 

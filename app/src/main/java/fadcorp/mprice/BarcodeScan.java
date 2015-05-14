@@ -42,22 +42,12 @@ public class BarcodeScan extends Activity {
         try {
             Intent intent = new Intent(ACTION_SCAN);
             intent.putExtra("SCAN_MODE", "PRODUCT_MODE");
+//            intent.putExtra("SCAN_MODE", "QR_CODE_MODE");
             startActivityForResult(intent, 0);
         } catch (ActivityNotFoundException anfe) {
             showDialog(BarcodeScan.this, "No Scanner Found", "Download a scanner code activity?", "Yes", "No").show();
         }
     }
-
-//    public void scanQR(View v) {
-//        Log.i(TAG, "scanQR");
-//        try {
-//            Intent intent = new Intent(ACTION_SCAN);
-//            intent.putExtra("SCAN_MODE", "QR_CODE_MODE");
-//            startActivityForResult(intent, 0);
-//        } catch (ActivityNotFoundException anfe) {
-//            showDialog(BarcodeScan.this, "No Scanner Found", "Download a scanner code activity?", "Yes", "No").show();
-//        }
-//    }
 
     private static AlertDialog showDialog(final Activity act, CharSequence title, CharSequence message, CharSequence buttonYes, CharSequence buttonNo) {
         Log.i(TAG, "showDialog");
@@ -86,12 +76,12 @@ public class BarcodeScan extends Activity {
         if (requestCode == 0) {
             if (resultCode == RESULT_OK) {
                 String contents = intent.getStringExtra("SCAN_RESULT");
-                String format = intent.getStringExtra("SCAN_RESULT_FORMAT");
+                //String format = intent.getStringExtra("SCAN_RESULT_FORMAT");
                 ReportData rpt = Select.from(ReportData.class).where(Condition.prop("BAR_CODE").eq(contents)).first();
                 try {
-                    NotificationDiag notf = new NotificationDiag(BarcodeScan.this, rpt.getId(),
-                                                                        rpt.getName(), rpt.getPrice(),
-                                                                        rpt.getModifiedOn());
+                    InfoProductDiag notf = new InfoProductDiag(BarcodeScan.this, rpt.getId(),
+                                                                 rpt.getName(), rpt.getPrice(),
+                                                                 rpt.getModifiedOn());
                     notf.setCancelable(false);
                     notf.show();
                 } catch (Exception e) {

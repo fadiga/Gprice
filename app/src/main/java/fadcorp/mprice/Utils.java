@@ -33,57 +33,6 @@ public class Utils extends Activity{
 
     private static final String TAG = Constants.getLogTag("Utils");
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-
-    public static String formatUrl(String from, String to, String value){
-        return String.format("http://rate-exchange.appspot.com/currency?from=%s&to=%s&q=%s", from, to, value);
-    }
-    public static String getFromUrl(String strUrl) throws IOException {
-        String data = "";
-        InputStream iStream = null;
-        try{
-            URL url = new URL(strUrl);
-
-            // Creating an http connection to communicate with url
-            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-
-            // Connecting to url
-            urlConnection.connect();
-
-            // Reading data from url
-            iStream = urlConnection.getInputStream();
-
-            BufferedReader br = new BufferedReader(new InputStreamReader(iStream));
-
-            StringBuffer sb  = new StringBuffer();
-
-            String line = "";
-            while( ( line = br.readLine())  != null){
-                sb.append(line);
-            }
-
-            data = sb.toString();
-
-            br.close();
-
-        }catch(Exception e){
-            Log.d("Exception while downloading url", e.toString());
-        }finally{
-            iStream.close();
-        }
-        return data;
-    }
-    public static ProgressDialog getStandardProgressDialog(Activity activity,
-                                                           String title,
-                                                           String message,
-                                                           boolean cancelable) {
-        ProgressDialog progressDialog = new ProgressDialog(activity);
-        progressDialog.setTitle(title);
-        progressDialog.setMessage(message);
-        progressDialog.setIcon(R.drawable.ic_launcher);
-        progressDialog.setCancelable(cancelable);
-        return progressDialog;
-    }
-
     public static void motification(Activity activity, String title, String message) {
         new AlertDialog.Builder(activity).setTitle(title)
                 .setMessage(message).show();

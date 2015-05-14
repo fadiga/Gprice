@@ -18,7 +18,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 
 import com.orm.query.Select;
 
@@ -108,7 +107,6 @@ public class Home extends Utils {
         }
         mAdapter = new ProductElementsAdapter(Home.this, productElements);
         mListView.setClipChildren(true);
-        //mListView.setItemsCanFocus(false);
         mListView.setAdapter(mAdapter);
     }
 
@@ -158,8 +156,8 @@ public class Home extends Utils {
         switch(keyCode){
             case KeyEvent.KEYCODE_BACK :
                 new AlertDialog.Builder(this)
-                        .setTitle("Quitter")
-                        .setMessage("Voulez vous vraiment quitter ?")
+                        .setTitle(getString(R.string.exit))
+                        .setMessage(getString(R.string.exit_confirmed))
                         .setPositiveButton(android.R.string.ok,
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {

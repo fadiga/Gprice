@@ -7,15 +7,14 @@
     <string name="required_connexion_body">Vous êtes en mode hors connexion.</string>
     <string name="required_connexion_cancel">Annuler</string>
     <string name="required_connexion_retry">Réessayer</string>
-
+    <string name="exit">Quiter</string>
     <string name="loading">Chargement en cours ...</string>
-    <string name="del_confird">Chargement en cours ...</string>
+    <string name="del_confird">Est vous sure de vouloir supprimer</string>
     <string name="action_search">recherche</string>
     <string name="app_market_url">market://details?id=fadcorp.mprice</string>
     <string name="version_button_label">V %1$s</string>
     <string name="error_field_empty">Champs requis</string>
     <string name="menu_settings">Configuration</string>
-
     <string name="device_prompt">Devises</string>
     <string-array name = "settings_money_type">
         <item>Fcfa</item>
@@ -42,4 +41,6 @@
     <string name="exportOk" formatted="false">%s a été exportée avec succès sur \n %s</string>
     <string name="delDB">%s a été supprimée avec succès.</string>
     <string name="scanne_bar_code">Scanner le code barre</string>
+    <string name="exit_confirmed">Voulez vous vraiment quitter ?</string>
+    <string name="succes_deleted">%s a été suprimé avec succès</string>
 </resources>
