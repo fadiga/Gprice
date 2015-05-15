@@ -90,7 +90,7 @@ public class Preferences extends PreferenceActivity {
             public void fileSelected(File file) {
                 Log.d(TAG, "selected file " + file.toString());
                 Utils.copyFile(Preferences.this, file, currentDB);
-            Utils.motification(Preferences.this, "", String.format(getBaseContext().getString(R.string.importOk, databaseName, file.getAbsolutePath())));
+                Utils.motification(Preferences.this, "", String.format(getBaseContext().getString(R.string.importOk, databaseName, file.getAbsolutePath())));
             }
         });
         fileDialog.showDialog();
@@ -99,18 +99,23 @@ public class Preferences extends PreferenceActivity {
     public void exportDatabse(boolean motif) {
         File sd = Environment.getExternalStorageDirectory();
 
+        File backupDir = new File(sd.getAbsolutePath() + "/" + packageName);
         if (!sd.canWrite()) {
+            Utils.motification(Preferences.this, "", String.format("Impossible d'ecrire sur %s",
+                                                                          backupDir));
             return;
         }
 
-        File backupDir = new File(sd.getAbsolutePath() + "/" + packageName);
         if(!backupDir.exists()) {
             if(backupDir.mkdir()) {}
         }
         Time t = new Time(Time.getCurrentTimezone());
         t.setToNow();
-        String dateNow = t.format("%Y-%m-%d-%Hh-%Mm");
-        String backupDBName = String.format("backup-%s.db", dateNow);
+        String suffixNameDB = t.format("%Y-%m-%d-%Hh-%Mm");
+        if(!motif){
+            suffixNameDB = suffixNameDB + "old";
+        }
+        String backupDBName = String.format("backup-%s.db", suffixNameDB);
         File backupDB = new File(backupDir, backupDBName);
 
         Log.d(TAG, currentDB + " " + currentDB.exists());

@@ -16,7 +16,8 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:background="@android:drawable/ic_menu_delete"
-                android:id="@+id/delete_btt">
+                android:id="@+id/delete_btt"
+                android:backgroundTint="#000">
             </TextView>
             <!--What you want to show-->
         </LinearLayout>
@@ -86,6 +87,7 @@
                  -->
             </RelativeLayout>
         <!-- Surface View End -->
+
     </com.daimajia.swipe.SwipeLayout>
 
 

@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -55,8 +56,8 @@ public class Home extends Utils {
         addProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                EditAndAddDialog editAndAddDialog = new EditAndAddDialog(Home.this, -1, null);
-                editAndAddDialog.show();
+                Intent a = new Intent(Home.this, BarcodeScan.class);
+                startActivity(a);
             }
         });
 
@@ -78,19 +79,20 @@ public class Home extends Utils {
         productDataList = Select.from(ReportData.class).orderBy("name").list();
 
         LinearLayout r = (LinearLayout)findViewById(R.id.is_empty_id);
+        //View addBtt = r.findViewById(R.id.addBtt);
+        ImageButton addBtt = (ImageButton)findViewById(R.id.addBtt);
+        addBtt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditAndAddDialog editAndAddDialog = new EditAndAddDialog(Home.this, -1, null);
+                editAndAddDialog.show();
+            }
+        });
         try{
             productDataList.get(0);
             r.setVisibility(View.GONE);
         } catch (Exception e){
             Log.d(TAG, e.toString());
-            View addBtt = r.findViewById(R.id.addBtt);
-            addBtt.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    EditAndAddDialog editAndAddDialog = new EditAndAddDialog(Home.this, -1, null);
-                    editAndAddDialog.show();
-                }
-            });
         }
         try {
             for (ReportData prod : productDataList) {
