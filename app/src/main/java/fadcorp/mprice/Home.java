@@ -5,6 +5,8 @@ import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
@@ -53,6 +55,7 @@ public class Home extends Utils {
             }
         });
         ImageView addProduct = (ImageView) actionBar.getCustomView().findViewById(R.id.addProduct);
+        addProduct.setVisibility(View.GONE);
         addProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
@@ -63,6 +66,7 @@ public class Home extends Utils {
 
 //        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME);
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+//        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#F29E5C")));
         setupUI();
         //TelephonyManager tMgr = (TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
         //String mPhoneNumber = tMgr.getLine1Number();
@@ -130,10 +134,6 @@ public class Home extends Utils {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
             Intent a = new Intent(Home.this, Preferences.class);
-            startActivity(a);
-        }
-        if (id == R.id.action_scan) {
-            Intent a = new Intent(Home.this, BarcodeScan.class);
             startActivity(a);
         }
         if (id == R.id.convert_devise) {
