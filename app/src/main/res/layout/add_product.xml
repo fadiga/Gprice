@@ -42,11 +42,13 @@
             <Button
                 style="@style/button"
                 android:text="Enregistrer"
-                android:id="@+id/saveButton"/>
+                android:id="@+id/saveButton"
+                android:background="@drawable/button"/>
             <Button
                 style="@style/button"
                 android:text="Enregistrer et nouveau"
-                android:id="@+id/saveContinuousButton"/>
+                android:id="@+id/saveContinuousButton"
+                android:background="@drawable/button"/>
         </LinearLayout>
     </LinearLayout>
 
