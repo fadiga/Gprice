@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Guide du vendeur</string>
+    <string name="app_name">Gprice</string>
     <string name="about">À propos</string>
     <string name="required_connexion_title">Connexion requise</string>
     <string name="required_connexion_body">Vous êtes en mode hors connexion.</string>

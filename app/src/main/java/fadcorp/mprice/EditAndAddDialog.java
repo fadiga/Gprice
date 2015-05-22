@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class EditAndAddDialog extends Dialog {
     private static final String TAG =  Constants.getLogTag("EditAndAddDialog");
-    private String barCodeStr = "null";
+    private String barCodeStr;
     private EditText nameField;
     private EditText priceField;
     private Button saveButton;
@@ -37,11 +37,7 @@ public class EditAndAddDialog extends Dialog {
         super(context);
         sId = articleId;
         context_ = context;
-        try {
-            barCodeStr = barCode.toString();
-        } catch (Exception e) {
-            Log.e(TAG, e.toString());
-        }
+        barCodeStr = barCode;
 
         try {
             oldReport = ReportData.findById(ReportData.class, sId);
@@ -72,7 +68,13 @@ public class EditAndAddDialog extends Dialog {
         int mDay = c.get(Calendar.DAY_OF_MONTH);
         date = c.getTime();
         dateField.setText(Constants.formatDate(date, getContext()));
-        barCodeField.setText("Code barre : " + barCodeStr);
+        try {
+            barCodeField.setText("Code barre : " + barCodeStr.toString());
+        }catch (Exception e){
+            barCodeField.setVisibility(View.GONE);
+            barCodeStr  = "";
+            Log.e(TAG, "barCode: " + e.toString());
+        }
 
         Button saveAndNewBtt = (Button) findViewById(R.id.saveContinuousButton);
         if(oldReport != null) {
@@ -129,7 +131,7 @@ public class EditAndAddDialog extends Dialog {
             priceField.setText("");
             nameField.requestFocus();
         }
-        if(barCodeStr.equals("null")) {
+        if(barCodeStr.equals("")) {
             ((Home) context_).setupUI();
         }
     }

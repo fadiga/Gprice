@@ -20,14 +20,12 @@
             android:id="@+id/priceField"
             android:hint="Prix U."
             android:imeOptions="actionDone" />
-
         <TextView
             style="@android:style/Widget.Holo.Spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/editDate"
             android:layout_margin="10dp" />
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -35,24 +33,20 @@
             android:text="Small Text"
             android:id="@+id/barCodeField"
             android:layout_margin="10dp"/>
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="74dp"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_weight="3.30">
+            android:layout_weight="3.30"
+            android:gravity="center">
             <Button
                 style="@style/button"
                 android:text="Enregistrer"
-                android:id="@+id/saveButton"
-                android:layout_weight="0.50"
-                android:layout_height="match_parent" />
+                android:id="@+id/saveButton"/>
             <Button
                 style="@style/button"
                 android:text="Enregistrer et nouveau"
-                android:id="@+id/saveContinuousButton"
-                android:layout_weight="0.50"
-                android:layout_height="match_parent" />
+                android:id="@+id/saveContinuousButton"/>
         </LinearLayout>
     </LinearLayout>
 
