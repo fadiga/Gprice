@@ -28,6 +28,11 @@
         <item>Dollar</item>
         <item>Yen</item>
     </string-array>
+    <string name="theme_prompt">Themes</string>
+    <string-array name = "settings_theme">
+        <item>black</item>
+        <item>white</item>
+    </string-array>
     <string name="action_settings">Configuration</string>
     <string name="manage_db">Gestion base de données</string>
     <string name="default_devise">Fcfa</string>
@@ -44,6 +49,7 @@
     <string name="exit_confirmed">Voulez vous vraiment quitter ?</string>
     <string name="succes_deleted">%s a été suprimé avec succès</string>
     <string name="ok">OK</string>
-    <string name="update">Mettre à jour</string>
-    <string name="saveAndNex">OK et nouveau</string>
+    <string name="update">METTRE À JOUR</string>
+    <string name="saveAndNex">OK ET NOUVEAU</string>
+    <string name="default_theme">black</string>
 </resources>

@@ -29,7 +29,7 @@
                  android:descendantFocusability="blocksDescendants"
                  android:id="@+id/rowLinearLayout"
                  android:orientation="horizontal"
-                 android:background="#ffffff">
+                >
                 <TextView
                     style="@style/textViewLabel"
                     android:id="@+id/nameProduct"

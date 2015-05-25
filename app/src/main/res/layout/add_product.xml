@@ -52,7 +52,8 @@
                 android:text="@string/saveAndNex"
                 android:id="@+id/saveContinuousButton"
                 android:background="@drawable/button"
-                android:layout_height="37dp"/>
+                android:layout_height="37dp"
+                android:layout_weight="0.50"/>
         </LinearLayout>
     </LinearLayout>
 

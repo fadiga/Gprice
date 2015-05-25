@@ -5,10 +5,12 @@ import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -40,9 +42,19 @@ public class Home extends Utils {
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String stheme = sharedPrefs.getString("theme", "");
+        Log.d(TAG, stheme.toString());
+        if (stheme.equals("black")) {
+            Log.d(TAG, "black");
+            setTheme(R.style.AppThemeBlack);
+        } else {
+            Log.d(TAG, "White");
+            setTheme(R.style.AppThemeWhite);
+        }
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
 
+        setContentView(R.layout.activity_home);
         ActionBar actionBar = getActionBar();
         // add the custom view to the action bar
         actionBar.setCustomView(R.layout.finder);

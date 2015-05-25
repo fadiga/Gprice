@@ -63,7 +63,6 @@ public class EditAndAddDialog extends Dialog {
         priceField = (EditText) findViewById(R.id.priceField);
         dateField = (TextView) findViewById(R.id.editDate);
         barCodeField = (TextView) findViewById(R.id.barCodeField);
-
         final Calendar c = Calendar.getInstance();
         int mYear = c.get(Calendar.YEAR);
         int mMonth = c.get(Calendar.MONTH);

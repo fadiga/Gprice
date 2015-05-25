@@ -4,6 +4,14 @@
         <!-- Customize your theme here. -->
         <item name="android:actionBarStyle">@style/MyActionBar</item>
     </style>
+    <style name="AppThemeBlack" parent="Base.V21.Theme.AppCompat.Light">
+        <!-- Customize your theme here. -->
+        <item name="android:actionBarStyle">@style/MyActionBar</item>
+    </style>
+    <style name="AppThemeWhite" parent="android:Theme.Holo.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:actionBarStyle">@style/MyActionBar</item>
+    </style>
     <style name="MyActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
         <item name="android:background">#ff10b100</item>
         <item name="android:titleTextStyle">@style/Theme.MyAppTheme.ActionBar.TitleTextStyle</item>

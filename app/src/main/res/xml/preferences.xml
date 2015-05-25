@@ -23,6 +23,16 @@
         </ListPreference>
     </PreferenceCategory>
 
+    <PreferenceCategory android:title="@string/theme_prompt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+        <ListPreference android:key="theme"
+                        android:title="theme"
+                        android:defaultValue="@string/default_theme"
+                        android:entries="@array/settings_theme"
+                        android:entryValues="@array/settings_theme">
+        </ListPreference>
+    </PreferenceCategory>
     <PreferenceCategory android:title="@string/manage_db"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
