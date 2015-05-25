@@ -14,7 +14,6 @@
         android:inputType="textFilter"
         android:imeOptions="actionSearch"
         android:hint="Rechercher"
-        android:focusableInTouchMode="true"
         android:autoText="true"
         android:layout_weight="0.96"
         android:textColor="#ff171717"/>

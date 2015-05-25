@@ -1,5 +1,6 @@
 package fadcorp.mprice;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -26,8 +27,10 @@ public class Preferences extends PreferenceActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setTitle(String.format("%1$s/%2$s", getString(R.string.app_name),
-                               getString(R.string.menu_settings)));
+        ActionBar actionBar = getActionBar();
+        actionBar.hide();
+//        setTitle(String.format("%1$s/%2$s", getString(R.string.app_name),
+//                               getString(R.string.menu_settings)));
         databaseName = Constants.databaseName;
         currentDB = getApplicationContext().getDatabasePath(databaseName);
         packageName = getPackageName();

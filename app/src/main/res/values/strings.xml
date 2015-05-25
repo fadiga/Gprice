@@ -43,4 +43,7 @@
     <string name="scanne_bar_code">Scanner le code barre</string>
     <string name="exit_confirmed">Voulez vous vraiment quitter ?</string>
     <string name="succes_deleted">%s a été suprimé avec succès</string>
+    <string name="ok">OK</string>
+    <string name="update">Mettre à jour</string>
+    <string name="saveAndNex">OK et nouveau</string>
 </resources>

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.orm.query.Condition;
 import com.orm.query.Select;
@@ -28,7 +29,7 @@ public class BarcodeScan extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.barcode_scan);
         scanBar();
-        LinearLayout scanbar = (LinearLayout) findViewById(R.id.barCodeLayout);
+        TextView scanbar = (TextView) findViewById(R.id.barCode);
         scanbar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,6 +79,7 @@ public class BarcodeScan extends Activity {
                 String contents = intent.getStringExtra("SCAN_RESULT");
                 //String format = intent.getStringExtra("SCAN_RESULT_FORMAT");
                 ReportData rpt = Select.from(ReportData.class).where(Condition.prop("BAR_CODE").eq(contents)).first();
+                
                 try {
                     InfoProductDiag notf = new InfoProductDiag(BarcodeScan.this, rpt.getId(),
                                                                  rpt.getName(), rpt.getPrice(),
@@ -86,9 +88,10 @@ public class BarcodeScan extends Activity {
                     notf.show();
                 } catch (Exception e) {
                     Log.e(TAG, e.toString());
-                    EditAndAddDialog editAndAddDialog = new EditAndAddDialog(BarcodeScan.this, -1, contents);
+                    EditAndAddDialog editAndAddDialog = new EditAndAddDialog(BarcodeScan.this, -1, true, contents);
                     editAndAddDialog.show();
                 }
+
             }
         }
     }

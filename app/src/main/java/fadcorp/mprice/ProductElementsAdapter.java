@@ -68,7 +68,7 @@ public class ProductElementsAdapter extends BaseAdapter {
         nameProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditAndAddDialog editAndAddDialog = new EditAndAddDialog(context, prodId, barCode);
+                EditAndAddDialog editAndAddDialog = new EditAndAddDialog(context, prodId, false, barCode);
                 editAndAddDialog.show();
             }
         });

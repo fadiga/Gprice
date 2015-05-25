@@ -6,6 +6,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -20,6 +21,7 @@ import java.util.List;
  */
 public class EditAndAddDialog extends Dialog {
     private static final String TAG =  Constants.getLogTag("EditAndAddDialog");
+    private final boolean isScan;
     private String barCodeStr;
     private EditText nameField;
     private EditText priceField;
@@ -33,24 +35,24 @@ public class EditAndAddDialog extends Dialog {
     private boolean next;
     Context context_;
 
-    public EditAndAddDialog(Context context, long articleId, String barCode) {
+    public EditAndAddDialog(Context context, long articleId, boolean scan, String barCode) {
         super(context);
         sId = articleId;
         context_ = context;
         barCodeStr = barCode;
-
+        isScan = scan;
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         try {
             oldReport = ReportData.findById(ReportData.class, sId);
-            setTitle("Mise à jour de " + oldReport.getName());
         }catch (Exception e){
             oldReport = null;
-            setTitle("Nouvel acticle");
         }
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_product);
+
         setupUI();
     }
     protected void setupUI() {
@@ -72,19 +74,20 @@ public class EditAndAddDialog extends Dialog {
             barCodeField.setText("Code barre : " + barCodeStr.toString());
         }catch (Exception e){
             barCodeField.setVisibility(View.GONE);
-            barCodeStr  = "";
+            //arCodeStr  = "";
             Log.e(TAG, "barCode: " + e.toString());
         }
 
+        saveButton = (Button) findViewById(R.id.saveButton);
         Button saveAndNewBtt = (Button) findViewById(R.id.saveContinuousButton);
         if(oldReport != null) {
+            saveButton.setText("Mettre à jour");
             date = oldReport.getModifiedOn();
             nameField.setText(oldReport.getName());
             priceField.setText(String.valueOf(oldReport.getPrice()));
             dateField.setText(Constants.formatDate(oldReport.getModifiedOn(), getContext()));
             saveAndNewBtt.setVisibility(View.GONE);
         }
-        saveButton = (Button) findViewById(R.id.saveButton);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -131,8 +134,10 @@ public class EditAndAddDialog extends Dialog {
             priceField.setText("");
             nameField.requestFocus();
         }
-        if(barCodeStr.equals("")) {
+        if(!isScan) {
             ((Home) context_).setupUI();
+        } else {
+            ((BarcodeScan) context_).finish();
         }
     }
     protected void storeReportData() {

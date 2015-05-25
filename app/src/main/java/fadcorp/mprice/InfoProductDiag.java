@@ -36,7 +36,7 @@ public class InfoProductDiag extends Dialog{
         sName = name;
         lPrice = price;
         sDate = date;
-        setTitle("info. " +sName);
+        setTitle("info. " + sName);
     }
 
     @Override
@@ -64,6 +64,7 @@ public class InfoProductDiag extends Dialog{
             @Override
             public void onClick(View v) {
                 dismiss();
+                ((BarcodeScan) ctxt).finish();
             }
         });
         updateBtt = (Button) findViewById(R.id.updateBtt);
@@ -71,7 +72,7 @@ public class InfoProductDiag extends Dialog{
             @Override
             public void onClick(View v) {
                 dismiss();
-                EditAndAddDialog editAndAddDialog = new EditAndAddDialog(ctxt, sID, null);
+                EditAndAddDialog editAndAddDialog = new EditAndAddDialog(ctxt, sID, true, null);
                 editAndAddDialog.show();
             }
         });

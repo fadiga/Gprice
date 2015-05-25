@@ -55,7 +55,7 @@ public class Home extends Utils {
             }
         });
         ImageView addProduct = (ImageView) actionBar.getCustomView().findViewById(R.id.addProduct);
-        addProduct.setVisibility(View.GONE);
+       // addProduct.setVisibility(View.GONE);
         addProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
@@ -88,7 +88,7 @@ public class Home extends Utils {
         addBtt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditAndAddDialog editAndAddDialog = new EditAndAddDialog(Home.this, -1, null);
+                EditAndAddDialog editAndAddDialog = new EditAndAddDialog(Home.this, -1, false, null);
                 editAndAddDialog.show();
             }
         });
