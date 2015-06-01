@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.daimajia.swipe.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                    android:layout_width="wrap_content" android:layout_height="100dp">
+                                    android:layout_width="wrap_content" android:layout_height="100dp"
+    >
         <!-- Bottom View Start-->
         <LinearLayout
             android:id="@+id/delete_linear"
@@ -53,7 +54,9 @@
                     android:layout_toLeftOf="@+id/devise"
                     android:layout_toStartOf="@+id/devise"
                     android:gravity="center"
-                    android:padding="1dp" />
+                    android:padding="1dp"
+                    android:layout_alignParentLeft="false"
+                    android:layout_alignParentRight="false"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -72,7 +75,9 @@
                     android:layout_alignBaseline="@+id/priceValue"
                     android:layout_alignEnd="@+id/nameProduct"
                     android:textStyle="italic"
-                    android:textSize="10dp" />
+                    android:textSize="10dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="5dp"/>
                 <!--<ImageView
                      android:id="@+id/editProd"
                      android:layout_width="wrap_content"

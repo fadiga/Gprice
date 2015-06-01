@@ -52,7 +52,8 @@
         <item name="android:editable">true</item>
         <!-- <item name="android:background">@color/abc_search_url_text_pressed</item> -->
     </style>
-    <style name="button" >
+    <style name="button">
+        <item name="android:buttonBarButtonStyle">?attr/buttonBarButtonStyle</item>
         <item name="android:layout_width" >wrap_content</item>
         <item name="android:layout_height" >wrap_content</item>
         <item name="android:layout_marginLeft">10dp</item>
