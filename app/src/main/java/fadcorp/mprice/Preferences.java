@@ -25,17 +25,26 @@ public class Preferences extends PreferenceActivity {
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String stheme = sharedPrefs.getString("theme", "");
+        Log.d(TAG, stheme.toString());
+        if (stheme.equals("black")) {
+            Log.d(TAG, "black");
+            setTheme(R.style.AppTheme_Dark);
+        } else {
+            Log.d(TAG, "White");
+            setTheme(R.style.AppTheme_Light);
+        }
+        Utils.themeRefresh(this);
         super.onCreate(savedInstanceState);
 
-        ActionBar actionBar = getActionBar();
-        actionBar.hide();
 //        setTitle(String.format("%1$s/%2$s", getString(R.string.app_name),
 //                               getString(R.string.menu_settings)));
         databaseName = Constants.databaseName;
         currentDB = getApplicationContext().getDatabasePath(databaseName);
         packageName = getPackageName();
 
-        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+//        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         String passwork = sharedPrefs.getString("passwork", "");
         String moneyType = sharedPrefs.getString("moneyType", null);
 

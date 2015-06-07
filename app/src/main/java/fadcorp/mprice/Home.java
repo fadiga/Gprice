@@ -5,12 +5,10 @@ import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -42,26 +40,22 @@ public class Home extends Utils {
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        String stheme = sharedPrefs.getString("theme", "");
-        Log.d(TAG, stheme.toString());
-        if (stheme.equals("black")) {
-            Log.d(TAG, "black");
-            setTheme(R.style.AppThemeBlack);
-        } else {
-            Log.d(TAG, "White");
-            setTheme(R.style.AppThemeWhite);
-        }
+        themeRefresh(this);
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_home);
-        ActionBar actionBar = getActionBar();
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+//        ActionBar actionBar = getActionBar();
         // add the custom view to the action bar
         actionBar.setCustomView(R.layout.finder);
         search = (EditText) actionBar.getCustomView().findViewById(R.id.searchfield);
         search.addTextChangedListener(new TextWatcher() {
-            public void afterTextChanged(Editable s) {}
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void afterTextChanged(Editable s) {
+            }
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 mAdapter.getFilter().filter(s);
             }
@@ -78,13 +72,12 @@ public class Home extends Utils {
 
 //        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME);
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-//        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#F29E5C")));
+        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ff10b100")));
         setupUI();
         //TelephonyManager tMgr = (TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
         //String mPhoneNumber = tMgr.getLine1Number();
         //Toast.makeText(this, mPhoneNumber, Toast.LENGTH_SHORT).show();
     }
-
     public void setupUI() {
 
         Log.i(TAG, "setupUI");
@@ -131,7 +124,9 @@ public class Home extends Utils {
     @Override
     protected void onResume() {
         super.onResume();
+        themeRefresh(this);
         setupUI();
+
     }
 
     @Override

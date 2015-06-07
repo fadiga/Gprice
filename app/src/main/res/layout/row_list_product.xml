@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.daimajia.swipe.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                    android:layout_width="wrap_content" android:layout_height="100dp"
-    >
+        android:layout_width="wrap_content" android:layout_height="wrap_content">
         <!-- Bottom View Start-->
         <LinearLayout
             android:id="@+id/delete_linear"
@@ -9,7 +8,7 @@
             android:weightSum="1"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="15dp"
+            android:padding="10dp"
             android:background="#ffff3b0f">
             <TextView
                 android:layout_width="wrap_content"
@@ -17,8 +16,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:background="@android:drawable/ic_menu_delete"
-                android:id="@+id/delete_btt"
-                android:backgroundTint="#000">
+                android:id="@+id/delete_btt">
             </TextView>
             <!--What you want to show-->
         </LinearLayout>
@@ -92,7 +90,6 @@
                  -->
             </RelativeLayout>
         <!-- Surface View End -->
-
     </com.daimajia.swipe.SwipeLayout>
 
 

@@ -4,8 +4,11 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.preference.PreferenceManager;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -29,7 +32,7 @@ import java.util.Locale;
 /**
  * Created by fad on 14/12/14.
  */
-public class Utils extends Activity{
+public class Utils extends ActionBarActivity {
 
     private static final String TAG = Constants.getLogTag("Utils");
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -95,5 +98,16 @@ public class Utils extends Activity{
     }
     protected static String stringFromField(EditText editText) {
         return editText.getText().toString().trim();
+    }
+
+   protected static void themeRefresh(Activity activite) {
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(activite);
+        String stheme = sharedPrefs.getString("theme", "");
+        Log.d(TAG, stheme.toString());
+        if (stheme.equals("black")) {
+            activite.setTheme(R.style.AppTheme_Dark);
+        } else {
+            activite.setTheme(R.style.AppTheme_Light);
+        }
     }
 }
