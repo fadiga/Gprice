@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -100,14 +101,22 @@ public class Utils extends ActionBarActivity {
         return editText.getText().toString().trim();
     }
 
-   protected static void themeRefresh(Activity activite) {
-        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(activite);
+   protected static void themeRefresh(Activity activity) {
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(activity);
         String stheme = sharedPrefs.getString("theme", "");
         Log.d(TAG, stheme.toString());
         if (stheme.equals("black")) {
-            activite.setTheme(R.style.AppTheme_Dark);
+            activity.setTheme(R.style.AppTheme_Dark);
         } else {
-            activite.setTheme(R.style.AppTheme_Light);
+            activity.setTheme(R.style.AppTheme_Light);
         }
+    }
+   public void reload() {
+        Intent intent = getIntent();
+        overridePendingTransition(0, 0);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        finish();
+        overridePendingTransition(0, 0);
+        startActivity(intent);
     }
 }

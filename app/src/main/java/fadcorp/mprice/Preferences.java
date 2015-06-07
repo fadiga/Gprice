@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.text.format.Time;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.orm.SugarContext;
 
@@ -26,15 +28,7 @@ public class Preferences extends PreferenceActivity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        String stheme = sharedPrefs.getString("theme", "");
-        Log.d(TAG, stheme.toString());
-        if (stheme.equals("black")) {
-            Log.d(TAG, "black");
-            setTheme(R.style.AppTheme_Dark);
-        } else {
-            Log.d(TAG, "White");
-            setTheme(R.style.AppTheme_Light);
-        }
+
         Utils.themeRefresh(this);
         super.onCreate(savedInstanceState);
 
@@ -44,14 +38,23 @@ public class Preferences extends PreferenceActivity {
         currentDB = getApplicationContext().getDatabasePath(databaseName);
         packageName = getPackageName();
 
-//        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        String passwork = sharedPrefs.getString("passwork", "");
-        String moneyType = sharedPrefs.getString("moneyType", null);
+//        String passwork = sharedPrefs.getString("passwork", "");
+//        String moneyType = sharedPrefs.getString("moneyType", null);
 
         SharedPreferences.Editor editor = sharedPrefs.edit();
         editor.putString("passwork", "");
         editor.apply();
         addPreferencesFromResource(R.xml.preferences);
+
+        ListPreference list = (ListPreference) findPreference("theme");
+        list.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                Log.d(TAG, "Theme is change");
+                Intent a = new Intent(Preferences.this, Home.class);
+                startActivity(a);
+                return true;
+            }
+        });
         final Preference restBtt = (Preference)findPreference("restDB");
         restBtt.setSummary(String.format(getString(R.string.summary_reset_db), 3));
 

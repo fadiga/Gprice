@@ -50,12 +50,8 @@ public class Home extends Utils {
         actionBar.setCustomView(R.layout.finder);
         search = (EditText) actionBar.getCustomView().findViewById(R.id.searchfield);
         search.addTextChangedListener(new TextWatcher() {
-            public void afterTextChanged(Editable s) {
-            }
-
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
+            public void afterTextChanged(Editable s) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 mAdapter.getFilter().filter(s);
             }
